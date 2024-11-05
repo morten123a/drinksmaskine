@@ -116,8 +116,10 @@ def update_order_status(conn, order_id, status):
 # Tilberedning af drink
 def prepare_drink(conn, drink_id):
     recipe = get_recipe(conn, drink_id)
+    
     for ingredient_id, quantity in recipe:
         stock = get_ingredient_stock(conn, ingredient_id)
+        
         if stock < quantity:
             print(f"Not enough ingredient {ingredient_id} in stock!")
             return False
