@@ -1,13 +1,9 @@
 body{
-    background-image: url("images/bar-back.png");
-    background-color:#cccccc;
     background-size: cover;
     background-repeat: no-repeat;
-    image-rendering:optimizeQuality;
-    margin: 10px;
-    margin-top: 10px;    
+    image-rendering:optimizeQuality;  
+    background-image: url("images/bar-back.png");  
 }
-
 footer{
     position: fixed;
     text-align: center;
