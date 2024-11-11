@@ -1,0 +1,19 @@
+body{
+    background-image: url("images/bar-back.png");
+    background-color:#cccccc;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 10px;
+    margin-top: 10px;
+}
+
+footer{
+    position: fixed;
+    text-align: center;
+    background-color: rgba(0, 255, 0, 0.616);
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
+
+}
