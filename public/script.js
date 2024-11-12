@@ -23,3 +23,11 @@ document.getElementById("form-recipe")
         )
 
     });
+
+
+async function getRecipies(drinkId) {
+    const recipes =
+        await fetch(`/get-recipe?drink_id=${drinkId}`)
+            .then(res => res.json());
+}
+
