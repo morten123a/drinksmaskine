@@ -6,68 +6,16 @@ from datetime import datetime
 # Databaseforbindelse
 def connect_db():
     conn = mysql.connector.connect(
-        host="localhost",               #host hvor databasen ligger      
-        user="your_username",           #username (drinksmaster)
-        password="your_password",       #Password (Eux20!)
-        database="drink_machine"        #database_name (Drinksdb)
+        host="172.21.114.226",               #host hvor databasen ligger      
+        user="drinksmaster",           #username (drinksmaster)
+        password="Eux20!",       #Password (Eux20!)
+        database="drinksdb"        #database_name (Drinksdb)
     )
-    cursor = conn.cursor()
-
-    # Opret tabeller, hvis de ikke findes
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS Ingredients (
-            ingredient_id INT PRIMARY KEY AUTO_INCREMENT,
-            name VARCHAR(255),
-            quantity_in_stock FLOAT
-        )
-    """)
-
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS Drinks (
-            drink_id INT PRIMARY KEY AUTO_INCREMENT,
-            name VARCHAR(255),
-            description TEXT
-        )
-    """)
-
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS Recipes (
-            recipe_id INT PRIMARY KEY AUTO_INCREMENT,
-            drink_id INT,
-            ingredient_id INT,
-            quantity FLOAT,
-            FOREIGN KEY (drink_id) REFERENCES Drinks(drink_id),
-            FOREIGN KEY (ingredient_id) REFERENCES Ingredients(ingredient_id)
-        )
-    """)
-
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS Orders (
-            order_id INT PRIMARY KEY AUTO_INCREMENT,
-            drink_id INT,
-            timestamp DATETIME,
-            status VARCHAR(50),
-            FOREIGN KEY (drink_id) REFERENCES Drinks(drink_id)
-        )
-    """)
-
     conn.commit()
     return conn
 
-# Håndtering af ingredienser
-def get_ingredient_stock(conn, ingredient_id):
-    cursor = conn.cursor()
-    cursor.execute("SELECT quantity_in_stock FROM Ingredients WHERE ingredient_id=%s", (ingredient_id,))
-    return cursor.fetchone()[0]
 
-def update_ingredient_stock(conn, ingredient_id, used_quantity):
-    cursor = conn.cursor()
-    cursor.execute("""
-        UPDATE Ingredients 
-        SET quantity_in_stock = quantity_in_stock - %s
-        WHERE ingredient_id = %s
-    """, (used_quantity, ingredient_id))
-    conn.commit()
+
 
 # Håndtering af drinks og opskrifter
 def add_drink(conn, name, description):
@@ -86,6 +34,31 @@ def add_ingredient_to_drink(conn, drink_id, ingredient_id, quantity):
         VALUES (%s, %s, %s)
     """, (drink_id, ingredient_id, quantity))
     conn.commit()
+
+def seach (conn, drink_name):
+    cursor = conn.cursor()
+    cursor.execute("""SELECT * FROM drinksdb.recipes_ingridients
+		LEFT JOIN drinksdb.ingredients ON drinksdb.recipes_ingridients.ingridients_id = drinksdb.ingredients.id
+		LEFT JOIN drinksdb.recipes ON drinksdb.recipes_ingridients.recipes_id = drinksdb.recipes.id
+		WHERE recipes.name = %s
+        """, (drink_name))
+    return cursor.fetchall()
+
+def filter(conn, filter):
+    cursor = conn.cursor()
+    filter_result = ""
+    for i, v in enumerate(filter):
+        if i+1 == len(filter):
+            filter_result += f"'{v}'"
+        else:
+            filter_result += f"'{v}', "
+
+    cursor.execute(f"""SELECT * FROM drinksdb.recipes_ingridients
+		LEFT JOIN drinksdb.ingredients ON drinksdb.recipes_ingridients.ingridients_id = drinksdb.ingredients.id
+		LEFT JOIN drinksdb.recipes ON drinksdb.recipes_ingridients.recipes_id = drinksdb.recipes.id
+        WHERE ingredients.name IN ({filter_result})
+        """)
+    return cursor.fetchall()
 
 def get_recipe(conn, drink_id):
     cursor = conn.cursor()
@@ -131,17 +104,18 @@ def prepare_drink(conn, drink_id):
     return True
 
 # Hovedfunktion
-def main():
-    conn = connect_db()
-    drink_id = add_drink(conn, "Example Drink", "A sample drink description")
-    add_ingredient_to_drink(conn, drink_id, 1, 50.0)  # Eksempel: Tilføj en ingrediens
-    order_id = create_order(conn, drink_id)
-    update_order_status(conn, order_id, "in progress")
-    if prepare_drink(conn, drink_id):
-        update_order_status(conn, order_id, "complete")
-    else:
-        update_order_status(conn, order_id, "failed")
-    conn.close()
-
+#def main():
+    # conn = connect_db()
+    # drink_id = add_drink(conn, "Example Drink", "A sample drink description")
+    # add_ingredient_to_drink(conn, drink_id, 1, 50.0)  # Eksempel: Tilføj en ingrediens
+    # order_id = create_order(conn, drink_id)
+    # update_order_status(conn, order_id, "in progress")
+    # if prepare_drink(conn, drink_id):
+    #     update_order_status(conn, order_id, "complete")
+    # else:
+    #     update_order_status(conn, order_id, "failed")
+    # conn.close()
+conn = connect_db()
+print(filter(conn, ['vodka', 'gin']))
 #if __name__ == "__main__":
 #    main()
