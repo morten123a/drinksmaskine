@@ -1,6 +1,8 @@
 import mysql.connector
 from datetime import datetime
 
+
+
 # Databaseforbindelse
 def connect_db():
     conn = mysql.connector.connect(
@@ -141,5 +143,5 @@ def main():
         update_order_status(conn, order_id, "failed")
     conn.close()
 
-if __name__ == "__main__":
-    main()
+#if __name__ == "__main__":
+#    main()
