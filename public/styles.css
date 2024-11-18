@@ -41,6 +41,23 @@ footer{
     border: 1px solid gray;
   }
 
+  .searchbarmydrinks{
+    display: flex;
+    justify-content: left;
+    
+}
+
+#drinksSearch {
+    width: 210px;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    border: none;
+    box-shadow: 1px 1px 4px;
+    border: 1px solid gray;
+  }
+
 .nav{  
     display: flex;
     justify-content: right;
@@ -77,3 +94,74 @@ footer{
 .nav a:hover {
     background-color: var(--color-accent-dark);
 }
+
+.logo{  
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    background-color: var(--color-accent);
+    position: absolute;
+    top:10px;
+    left: 10px;
+    width: fit-content;
+    /* gap: 10px;   */
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    box-shadow: 1px 1px 4px;
+    border: 1px solid var(--color-accent-dark);
+    border-radius: 24px;
+}
+
+#logoimg{
+   border-radius: 15px; 
+}
+
+
+/* Dropdown menu */
+.dropdown-menu {
+    position: absolute;
+    top: 160px;
+    left: 10px;
+    width: 210px;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-category {
+    margin-bottom: 20px;
+}
+
+.dropdown-category h4 {
+    margin: 0 0 10px;
+    font-size: 16px;
+}
+
+.dropdown-category ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-category li {
+    margin: 5px 0;
+}
+
+#apply-filters {
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+#apply-filters:hover {
+    background-color: #218838;
+}
+

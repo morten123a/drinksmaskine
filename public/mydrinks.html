@@ -1,16 +1,65 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="20">
     <title>Drinksmaskine</title>
     <script src="/script.js" defer></script>
     <link rel="stylesheet" href="/styles.css">
 </head>
+
 <body>
     <div class="nav">
         <a href="index.html">Search</a>
         <a href="mydrinks.html" class="xi-based">My drinks</a>
         <!--  <button id="collapse-expand-nav">icon</button>-->
     </div>
+    <div class="logo">
+        <img id="logoimg" src="images\logo.png" width="50px" height="50px">
+    </div>
+    <div class="searchbarmydrinks">
+        <input type="text" id="drinksSearch" name="drinksbar" placeholder="Search">
+    </div>
+
+
+        <div class="dropdown-menu">
+            <div class="dropdown-category">
+                <h4>Alkohol</h4>
+                <ul>
+                    <li><label><input type="checkbox" value="Gin" id="checkbox-gin"> Gin</label></li>
+                    <li><label><input type="checkbox" value="Vodka" id="checkbox-vodka"> Vodka</label></li>
+                    <li><label><input type="checkbox" value="Rom" id="checkbox-rom"> Rom</label></li>
+                </ul>
+            </div>
+            <div class="dropdown-category">
+                <h4>Sirup</h4>
+                <ul>
+                    <li><label><input type="checkbox" value="Mango sirup" id="checkbox-mango-sirup"> Mango sirup</label></li>
+                    <li><label><input type="checkbox" value="Blue curacao" id="checkbox-blue-curacao"> Blue curacao</label></li>
+                    <li><label><input type="checkbox" value="Passionfruit Sirup" id="checkbox-passionfruit-sirup"> Passionfruit Sirup</label></li>
+                    <li><label><input type="checkbox" value="Grenadine" id="checkbox-grenadine"> Grenadine</label></li>
+                </ul>
+            </div>
+            <div class="dropdown-category">
+                <h4>Sodavand</h4>
+                <ul>
+                    <li><label><input type="checkbox" value="Fanta" id="checkbox-fanta"> Fanta</label></li>
+                    <li><label><input type="checkbox" value="Cola" id="checkbox-cola"> Cola</label></li>
+                    <li><label><input type="checkbox" value="Schweppes" id="checkbox-schweppes"> Schweppes</label></li>
+                    <li><label><input type="checkbox" value="faxe kondi" id="checkbox-faxe-kondi"> Faxe Kondi</label></li>
+                </ul>
+            </div>
+            <div class="dropdown-category">
+                <h4>Andet</h4>
+                <ul>
+                    <li><label><input type="checkbox" value="Booster" id="checkbox-booster"> Booster</label></li>
+                    <li><label><input type="checkbox" value="redbull" id="checkbox-redbull"> Redbull</label></li>
+                    <li><label><input type="checkbox" value="Æblejuice" id="checkbox-æblejuice"> Æblejuice</label></li>
+                </ul>
+            </div>
+            <button id="apply-filters">Gem Filters</button>
+        </div>
 </body>
+
 </html>
