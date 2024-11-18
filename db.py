@@ -37,14 +37,14 @@ def add_ingredient_to_drink(conn, drink_id, ingredient_id, quantity):
 
 def seach (conn, drink_name):
     cursor = conn.cursor()
-    cursor.execute("""SELECT * FROM drinksdb.recipes_ingridients
-		LEFT JOIN drinksdb.ingredients ON drinksdb.recipes_ingridients.ingridients_id = drinksdb.ingredients.id
-		LEFT JOIN drinksdb.recipes ON drinksdb.recipes_ingridients.recipes_id = drinksdb.recipes.id
+    cursor.execute("""SELECT * FROM drinksdb.recipes_ingredients
+		LEFT JOIN drinksdb.ingredients ON drinksdb.recipes_ingredients.ingredients_id = drinksdb.ingredients.id
+		LEFT JOIN drinksdb.recipes ON drinksdb.recipes_ingredients.recipes_id = drinksdb.recipes.id
 		WHERE recipes.name = %s
         """, (drink_name))
     return cursor.fetchall()
 
-def filter(conn, filter):
+def filter(conn, filter, seach_filter):
     cursor = conn.cursor()
     filter_result = ""
     for i, v in enumerate(filter):
@@ -53,11 +53,19 @@ def filter(conn, filter):
         else:
             filter_result += f"'{v}', "
 
-    cursor.execute(f"""SELECT * FROM drinksdb.recipes_ingridients
-		LEFT JOIN drinksdb.ingredients ON drinksdb.recipes_ingridients.ingridients_id = drinksdb.ingredients.id
-		LEFT JOIN drinksdb.recipes ON drinksdb.recipes_ingridients.recipes_id = drinksdb.recipes.id
+    cursor.execute(f"""SELECT * FROM drinksdb.recipes_ingredients
+		LEFT JOIN drinksdb.ingredients ON drinksdb.recipes_ingredients.ingredients_id = drinksdb.ingredients.id
+		LEFT JOIN drinksdb.recipes ON drinksdb.recipes_ingredients.recipes_id = drinksdb.recipes.id
         WHERE ingredients.name IN ({filter_result})
         """)
+    seach_filter = None
+    if (seach_filter != None):
+            cursor.execute("""SELECT * FROM drinksdb.recipes_ingredients
+		    LEFT JOIN drinksdb.ingredients ON drinksdb.recipes_ingredients.ingredients_id = drinksdb.ingredients.id
+		    LEFT JOIN drinksdb.recipes ON drinksdb.recipes_ingredients.recipes_id = drinksdb.recipes.id
+		    WHERE ingredients.name IN ({filter_result})
+            WHERE recipes.name = %s
+             """, (seach_filter))
     return cursor.fetchall()
 
 def get_recipe(conn, drink_id):
