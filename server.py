@@ -14,7 +14,8 @@ def seach_handler(req, res, next):
 
 def filter_handler(req, res, next):
     filter_req = json.loads(req.query.filter)
-    filter = db.filter(dbcon, filter_req)
+    filter = db.get_recipes_by_included_ingredients(dbcon, filter_req)
+    print(filter)
     return res.json(filter)
 
 # /search?drink_name=...
