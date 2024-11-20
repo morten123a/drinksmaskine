@@ -1,21 +1,11 @@
-// document.getElementById("my-form")
-//     .addEventListener('submit', async (e) => {
-//         e.preventDefault();
-//         const data = new FormData(e.target);
-//         console.log(data.get("my-name"))
+import { sendHttpGetRequest } from "./common";
 
-//         const name = data.get("my-name");
-//         const response = await fetch(`/saymyname?name=${name}`).then(res => res.json());
-//         console.log(response
-//         )
 
-//     });
-
-// const searchbar = document.getElementById("mySearch");
-// searchbar.addEventListener('keypress', ()=>{
-//     const value = searchbar.value
-//     console.log(value)
-// })'
+const searchdrinks = document.getElementById("drinksSearch");
+    searchdrinks.addEventListener('keypress', ()=>{
+    const value2 = searchdrinks.value
+    console.log(value2)
+})
 const checkboxTable = [
     { id: "checkbox-gin",                   value: "gin" },
     { id: "checkbox-vodka",                 value: "vodka" },
@@ -56,7 +46,9 @@ for (const {id, value} of checkboxTable){
 
 
 const filterslist = document.getElementById("apply-filters");
-    filterslist.addEventListener('click', () => {
+    filterslist.addEventListener('click', async () => {
      console.log(getActivatedFilters())
-})
+     const responseData = await sendHttpGetRequest('')  
+
+});
 
