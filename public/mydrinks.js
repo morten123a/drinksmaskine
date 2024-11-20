@@ -1,8 +1,8 @@
-import { sendHttpGetRequest } from "./common";
+import { sendHttpGetRequest } from "./common.js";
 
 
 const searchdrinks = document.getElementById("drinksSearch");
-    searchdrinks.addEventListener('keypress', ()=>{
+searchdrinks.addEventListener('keypress', ()=>{
     const value2 = searchdrinks.value
     console.log(value2)
 })
@@ -24,7 +24,7 @@ const checkboxTable = [
 ]
 
 
-let activatedFilters = []
+
 
 function getActivatedFilters (){
     let filters = []
@@ -37,19 +37,40 @@ function getActivatedFilters (){
     return filters
 }
 
+async function performFilterQuery (){
+    //Clear search bar
+    searchdrinks.value = ""
+    //get filters
+    const filters = getActivatedFilters()
+    //Send filter req
+    const responseData = await sendHttpGetRequest('/mydrinks_filter', {
+        filter: filters, 
+
+    })  
+
+    //show results
+    console.log(responseData)
+}
+
+
+
+
+
+
+
+
 for (const {id, value} of checkboxTable){
     document.getElementById(id).addEventListener("change", ()=>{
         console.log(getActivatedFilters())
-        activatedFilters = getActivatedFilters()
+        
     });
 }
 
 
 const filterslist = document.getElementById("apply-filters");
-    filterslist.addEventListener('click', async () => {
+filterslist.addEventListener('click', async () => {
      console.log(getActivatedFilters())
-     const responseData = await sendHttpGetRequest('/mydrinks_filter')  
-
+     performFilterQuery()
 });
 
 // inside html 
