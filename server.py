@@ -33,8 +33,8 @@ def static_files(req, res, next):
 
 app.get("/", home)
 app.get("/index", seach_handler)
-app.get("/mydrinks", filter_handler)
-app.get("/mydrinks", seach_handler2)
+app.get("/mydrinks_filter", filter_handler)
+app.get("/mydrinks_seach", seach_handler2)
 app.get("/*", static_files)
 
 app.listen(3000)
