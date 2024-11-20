@@ -48,7 +48,7 @@ for (const {id, value} of checkboxTable){
 const filterslist = document.getElementById("apply-filters");
     filterslist.addEventListener('click', async () => {
      console.log(getActivatedFilters())
-     const responseData = await sendHttpGetRequest('')  
+     const responseData = await sendHttpGetRequest('/mydrinks_filter')  
 
 });
 
