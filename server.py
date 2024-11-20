@@ -16,6 +16,13 @@ def filter_handler(req, res, next):
     filter = db.filter(dbcon, filter_req)
     return res.json(filter)
 
+# /search?drink_name=...
+def seach_handler2(req, res, next):
+    drink_name = req.query.drink_name #henter drink navnet som brugeres har søgt på
+    search_result = db.seach(dbcon, drink_name) #finder brugeres resultat
+    return res.json(search_result)
+
+
 def home(req, res, next):
     return res.sendfile("public/index.html")
 
@@ -24,7 +31,9 @@ def static_files(req, res, next):
     return res.sendfile(file_path)
 
 app.get("/", home)
-app.get("/get-drink", seach_handler)
+app.get("/index", seach_handler)
+app.get("/mydrinks", filter_handler)
+app.get("/mydrinks", seach_handler2)
 app.get("/*", static_files)
 
 app.listen(3000)
