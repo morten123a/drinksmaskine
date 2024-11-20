@@ -1,6 +1,7 @@
 from express_server import express
 import db
 import glob
+import json
 
 app = express()
 dbcon = db.connect_db()
@@ -12,7 +13,7 @@ def seach_handler(req, res, next):
     return res.json(search_result)
 
 def filter_handler(req, res, next):
-    filter_req = req.query.filter
+    filter_req = json.loads(req.query.filter)
     filter = db.filter(dbcon, filter_req)
     return res.json(filter)
 
