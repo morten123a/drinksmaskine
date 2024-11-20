@@ -11,10 +11,10 @@ def seach_handler(req, res, next):
     search_result = db.seach(dbcon, drink_name) #finder brugeres resultat
     return res.json(search_result)
 
-def get_recipe_requesthandler(req, res, next):
-    drink_id = req.query.drink_id
-    recipies = db.get_recipe(dbcon, drink_id)
-    return res.json(recipies)
+def filter_handler(req, res, next):
+    filter_req = req.query.filter
+    filter = db.filter(dbcon, filter_req)
+    return res.json(filter)
 
 def home(req, res, next):
     return res.sendfile("public/index.html")
