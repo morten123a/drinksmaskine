@@ -191,6 +191,8 @@ footer{
     border-radius: 5px;
     box-shadow: 1px 1px 4px;
     border: 1px solid gray;
+    text-align: center;
+    text-decoration: none;
 
 }
 
