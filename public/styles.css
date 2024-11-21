@@ -191,12 +191,28 @@ footer{
     border-radius: 5px;
     box-shadow: 1px 1px 4px;
     border: 1px solid gray;
-    text-align: center;
-    text-decoration: none;
+    display: flex;
+    flex-direction: column;
 
 }
 
+.drinksoutput h3{
+    text-align: center ;
 
+}
+
+.drinksoutput img{
+    max-height: 200px;
+}
+
+.drinksoutput span{
+    text-align: left;
+}
+
+.colum{
+    display: flex;
+    flex-direction: column;
+}
 
 .my-drinks {
     display: flex;

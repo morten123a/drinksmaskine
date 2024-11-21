@@ -7,20 +7,20 @@ searchdrinks.addEventListener('keypress', () => {
     console.log(value2)
 })
 const checkboxTable = [
-    { id: "checkbox-gin",                   value: "gin" },
-    { id: "checkbox-vodka",                 value: "vodka" },
-    { id: "checkbox-rom",                   value: "rom" },
-    { id: "checkbox-mango-sirup",           value: "mango sirup" },
-    { id: "checkbox-blue-curacao",          value: "blue curacao" },
-    { id: "checkbox-passionfruit-sirup",    value: "passionfruit sirup" },
-    { id: "checkbox-grenadine",             value: "grenadine" },
-    { id: "checkbox-fanta",                 value: "fanta" },
-    { id: "checkbox-cola",                  value: "cola" },
-    { id: "checkbox-schweppes",             value: "schweppes" },
-    { id: "checkbox-faxe-kondi",            value: "faxe kondi" },
-    { id: "checkbox-booster",               value: "booster" },
-    { id: "checkbox-redbull",               value: "redbull" },
-    { id: "checkbox-æblejuice",             value: "æblejuice" },
+    { id: "checkbox-gin", value: "gin" },
+    { id: "checkbox-vodka", value: "vodka" },
+    { id: "checkbox-rom", value: "rom" },
+    { id: "checkbox-mango-sirup", value: "mango sirup" },
+    { id: "checkbox-blue-curacao", value: "blue curacao" },
+    { id: "checkbox-passionfruit-sirup", value: "passionfruit sirup" },
+    { id: "checkbox-grenadine", value: "grenadine" },
+    { id: "checkbox-fanta", value: "fanta" },
+    { id: "checkbox-cola", value: "cola" },
+    { id: "checkbox-schweppes", value: "schweppes" },
+    { id: "checkbox-faxe-kondi", value: "faxe kondi" },
+    { id: "checkbox-booster", value: "booster" },
+    { id: "checkbox-redbull", value: "redbull" },
+    { id: "checkbox-æblejuice", value: "æblejuice" },
 ]
 
 
@@ -49,14 +49,8 @@ async function performFilterQuery() {
     })
 
     //show results
-    console.log(responseData)
+    return responseData;
 }
-
-
-
-
-
-
 
 
 for (const { id, value } of checkboxTable) {
@@ -82,17 +76,31 @@ async function drinksoutput() {
 
     const myoutput = document.getElementById("my-drinks");
 
-    const Outputdata = [
-        { lvl: 44, name: "jeppe", id: 4 },
-        { lvl: 34, name: "jeppe", id: 22 },
-        { lvl: 9, name: "morben", id: 213123 },
-    ]
+    const outputdata = await performFilterQuery()
 
-    myoutput.innerHTML = Outputdata
-        .map((Outputdata) => {
+    console.log(outputdata)    
+    for (const drink in outputdata) {
+        for (const i in outputdata[drink]) {
+        console.log(outputdata[drink][i])
+        }
+    }
+
+    myoutput.innerHTML = Object.entries(outputdata)
+        .map(([drinkName, ingredientsAndAmounts]) => {
+
+            const ingredientsAndAmountsHtml = ingredientsAndAmounts
+                .map(({ingredient, amount}) => {
+                    return `
+                        <span class="colum">${ingredient} x ${amount}</span>
+                    `;
+                })
+                .join("");
+
             return `
                  <div class="drinksoutput">
-                     <p1>name is ${Outputdata.name} and lvl is ${Outputdata.lvl}</p1>
+                     <h3>${drinkName}</h3>
+                     <img src="/images/${drinkName}.png" alt=>
+                     <div>${ingredientsAndAmountsHtml}</div>
                  </div>
              `;
         })
