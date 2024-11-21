@@ -10,9 +10,25 @@
 //         
 
 //     });
+import { sendHttpGetRequest } from "./common.js";
 
 const searchbar = document.getElementById("mySearch");
-    searchbar.addEventListener('keypress', ()=>{
+
+async function performSearchQuery(){
+    const responseData1 = await sendHttpGetRequest('/search', {
+        // search: searchbar.value,
+        search: searchbar.value,
+    })
+    searchbar.value = ""
+    console.log(responseData1)
+}
+
+searchbar.addEventListener('keydown', function(event){
     const value = searchbar.value
-    console.log(value)
+    if (event.key === 'Enter'){
+        //her skal main function kørers
+
+        performSearchQuery()
+        console.log(performSearchQuery())
+    }
 })

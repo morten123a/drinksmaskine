@@ -1,11 +1,11 @@
 import { sendHttpGetRequest } from "./common.js";
 
-
 const searchdrinks = document.getElementById("drinksSearch");
 searchdrinks.addEventListener('keypress', ()=>{
     const value2 = searchdrinks.value
     console.log(value2)
 })
+
 const checkboxTable = [
     { id: "checkbox-gin",                   value: "gin" },
     { id: "checkbox-vodka",                 value: "vodka" },
@@ -22,9 +22,6 @@ const checkboxTable = [
     { id: "checkbox-redbull",               value: "redbull" },
     { id: "checkbox-æblejuice",             value: "æblejuice" },
 ]
-
-
-
 
 function getActivatedFilters (){
     let filters = []
@@ -52,13 +49,6 @@ async function performFilterQuery (){
     console.log(responseData)
 }
 
-
-
-
-
-
-
-
 for (const {id, value} of checkboxTable){
     document.getElementById(id).addEventListener("change", ()=>{
         console.log(getActivatedFilters())
@@ -66,44 +56,9 @@ for (const {id, value} of checkboxTable){
     });
 }
 
-
 const filterslist = document.getElementById("apply-filters");
 filterslist.addEventListener('click', async () => {
      console.log(getActivatedFilters())
      performFilterQuery()
 });
 
-// inside html 
-//  <div id="my-div"></div>
-
-// const myDiv = document.getElementById("my-div");
-
-// const myPlayers = [
-//     { lvl: 44, name: "jeppe",  id: 4 },
-//     { lvl: 34, name: "jeppe",  id: 22 },
-//     { lvl: 9,  name: "morben", id: 213123 },
-// ]
-
-// myDiv.innerHTML = myPlayers
-//     .map((player) => {
-//         return `
-//             <div class="player" id="player-${player.id}">
-//                 <p1>name is ${player.name} and lvl is ${player.lvl}</p1>
-//             </div>
-//         `;
-//     })
-//     .join("");
-
-
-// inside html 
-//  <div id="my-div">
-//      <div class="player" id="player-4">
-//          <p1>name is jeppe and lvl is 44</p1>
-//      </div>
-//      <div class="player" id="player-22">
-//          <p1>name is jeppe and lvl is 34</p1>
-//      </div>
-//      <div class="player" id="player-213123">
-//          <p1>name is morben and lvl is 9</p1>
-//      </div>
-//  </div>

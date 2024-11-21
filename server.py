@@ -12,9 +12,13 @@ def deafult_handler(req, res, next):
 
 # /search?drink_name=...
 def seach_handler(req, res, next):
-    drink_name = req.query.drink_name #henter drink navnet som brugeres har søgt på
-    search_result = db.seach(dbcon, drink_name) #finder brugeres resultat
-    return res.json(search_result)
+    try:
+        drink_name = req.query.search#henter drink navnet som brugeres har søgt på
+        search_result = db.seach(dbcon, drink_name) #finder brugeres resultat
+        return res.json(search_result)
+    except Exception as e:
+        print(e.with_traceback())
+        return res.json({ "ok": False, "msg": "server error" })
 
 def filter_handler(req, res, next):
     filter_req = json.loads(req.query.filter)
@@ -37,7 +41,7 @@ def static_files(req, res, next):
     return res.sendfile(file_path)
 
 app.get("/", home)
-app.get("/index", seach_handler)
+app.get("/search", seach_handler)
 app.get("/mydrinks_deafult", deafult_handler)
 app.get("/mydrinks_filter", filter_handler)
 app.get("/mydrinks_seach", seach_handler2)
