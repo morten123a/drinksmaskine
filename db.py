@@ -12,6 +12,26 @@ def connect_db():
     conn.commit()
     return conn
 
+def default_display (conn):
+    cursor = conn.cursor()
+    cursor.execute("""
+        SELECT ingredients.name, recipes_ingredients.amount, recipes.name FROM recipes_ingredients 
+        JOIN ingredients ON ingredients.id = recipes_ingredients.ingredients_id
+        JOIN recipes ON recipes.id = recipes_ingredients.recipes_id
+        """)
+    rows = cursor.fetchall()
+    result = {}
+    for row in rows:
+        result[row[2]] = []
+
+    for row in rows:
+        for recipe_name in result:
+            if recipe_name != row[2]:
+                continue
+            result[recipe_name].append({"ingredient": row[0], "amount": row[1]})
+    
+    return  result
+
 def seach (conn, drink_name):
     cursor = conn.cursor()
     cursor.execute("""SELECT * FROM drinksdb.recipes_ingredients
