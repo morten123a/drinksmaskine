@@ -104,7 +104,7 @@ async function drinksoutput() {
                  </div>
              `;
         })
-        .join("");
+        .join("searchdrinks");
 }
 
 
