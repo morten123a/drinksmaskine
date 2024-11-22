@@ -12,44 +12,23 @@ def connect_db():
     conn.commit()
     return conn
 
-def default_display (conn):
-    cursor = conn.cursor()
-    cursor.execute("""
-        SELECT ingredients.name, recipes_ingredients.amount, recipes.name FROM recipes_ingredients 
-        JOIN ingredients ON ingredients.id = recipes_ingredients.ingredients_id
-        JOIN recipes ON recipes.id = recipes_ingredients.recipes_id
-        """)
-    rows = cursor.fetchall()
-    result = {}
-
-    for row in rows:
-        result[row[2]] = []
-
-    for row in rows:
-        for recipe_name in result:
-            if recipe_name != row[2]:
-                continue
-            result[recipe_name].append({"ingredient": row[0], "amount": row[1]})
-    return  result
-
 def seach (conn, drink_name):
-    print (drink_name)
-    edited_drink_name = drink_name.replace('"', '')
-    cursor = conn.cursor()
+    edited_drink_name = drink_name.replace('"', '') #fjerner "" så det passer med syntaksen til databasen
+    cursor = conn.cursor() #sætter vores database forbindelse til at vi kan kører ting igennem den
     cursor.execute(f"""
         SELECT ingredients.name, recipes_ingredients.amount, recipes.name FROM drinksdb.recipes_ingredients
 		LEFT JOIN drinksdb.ingredients ON drinksdb.recipes_ingredients.ingredients_id = drinksdb.ingredients.id
 		LEFT JOIN drinksdb.recipes ON drinksdb.recipes_ingredients.recipes_id = drinksdb.recipes.id
 		WHERE recipes.name LIKE "%{edited_drink_name}%"
-        """)
-    rows = cursor.fetchall()
-    result = {}
+        """) # sender en query til databasen med det søgte navn
+    rows = cursor.fetchall() #henter alt dataen fra query'en
+    result = {} #laver en tom variable
 
-    for row in rows:
-        result[row[2]] = []
+    for row in rows: #segmentere dataen i navnende, i row 2
+        result[row[2]] = [] #ligger de forskellige navne ind i variablen
 
-    for row in rows:
-        for recipe_name in result:
+    for row in rows: #segmentere dataen for hver navn til den ingredienser
+        for recipe_name in result: #
             if recipe_name != row[2]:
                 continue
             result[recipe_name].append({"ingredient": row[0], "amount": row[1]})

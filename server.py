@@ -6,10 +6,6 @@ import json
 app = express()
 dbcon = db.connect_db()
 
-def deafult_handler(req, res, next):
-    deafult_data = db.seach(dbcon) #finder brugeres resultat
-    return res.json(deafult_data)
-
 # /search?drink_name=...
 def seach_handler(req, res, next):
     try:
@@ -35,7 +31,6 @@ def static_files(req, res, next):
 
 app.get("/", home)
 app.get("/search", seach_handler)
-app.get("/mydrinks_deafult", deafult_handler)
 app.get("/mydrinks_filter", filter_handler)
 app.get("/*", static_files)
 
