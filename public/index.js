@@ -21,6 +21,7 @@ async function performSearchQuery(){
     })
     searchbar.value = ""
     console.log(responseData1)
+    return responseData1;
 }
 
 searchbar.addEventListener('keydown', function(event){
@@ -47,24 +48,24 @@ async function drinksoutput() {
         }
     }
 
-    myoutput.innerHTML = Object.entries(outputdata)
-        .map(([drinkName, ingredientsAndAmounts]) => {
+     myoutput.innerHTML = Object.entries(outputdata)
+         .map(([drinkName, ingredientsAndAmounts]) => {
 
-            const ingredientsAndAmountsHtml = ingredientsAndAmounts
-                .map(({ingredient, amount}) => {
-                    return `
-                        <span class="colum">${ingredient} x ${amount}</span>
-                    `;
-                })
-                .join("");
+             const ingredientsAndAmountsHtml = ingredientsAndAmounts
+                 .map(({ingredient, amount}) => {
+                     return `
+                         <span class="colum">${ingredient} x ${amount}</span>
+                     `;
+                 })
+                 .join("");
 
-            return `
-                 <div class="drinksoutput">
-                     <h3>${drinkName}</h3>
-                     <img src="/images/${drinkName}.png" alt=>
-                     <div>${ingredientsAndAmountsHtml}</div>
-                 </div>
-             `;
-        })
-        .join("");
+             return `
+                  <div class="drinksoutput1">
+                      <h3>${drinkName}</h3>
+                      <img src="/images/${drinkName}.png" alt=>
+                      <div>${ingredientsAndAmountsHtml}</div>
+                  </div>
+              `;
+         })
+         .join("");
 }
