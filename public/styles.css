@@ -222,3 +222,8 @@ footer{
     flex-direction: row;
 
 }
+
+.drinksseach {
+    display: flex;
+    flex-direction: column;
+}
