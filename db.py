@@ -27,9 +27,9 @@ def seach (conn, drink_name):
     for row in rows: #segmentere dataen i navnende, i row 2
         result[row[2]] = [] #ligger de forskellige navne ind i variablen
 
-    for row in rows: #segmentere dataen for hver navn til den ingredienser
-        for recipe_name in result: #
-            if recipe_name != row[2]:
+    for row in rows: #segmentere dataen for hver navn til den ingrediens
+        for recipe_name in result: #laver et nyt loop for at gå igennem alle navnene
+            if recipe_name != row[2]:# kontrol 
                 continue
             result[recipe_name].append({"ingredient": row[0], "amount": row[1]})
     return  result
