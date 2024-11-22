@@ -182,7 +182,7 @@ footer{
 }
 
 .drinksoutput{
-    background-color: rgb(251, 0, 0);
+    background-color: rgb(0, 47, 187);
     display: flex;
     width: 200px;
     height: 350px;
@@ -198,15 +198,18 @@ footer{
 
 .drinksoutput h3{
     text-align: center ;
-
+    font-weight: bolder;
+    color: white;
 }
 
 .drinksoutput img{
     max-height: 200px;
+    margin: 2px;
 }
 
 .drinksoutput span{
     text-align: left;
+    color: white;
 }
 
 .colum{
