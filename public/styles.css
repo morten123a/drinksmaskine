@@ -5,6 +5,7 @@
    --color-accent-dark:rgb(230, 230, 230);
    --color-background: rgb(230,230,230)
 }
+
 body{
     background-size: cover;
     background-repeat: no-repeat;
@@ -22,12 +23,10 @@ footer{
     bottom: 0;
     width: 100%;
     color: black;
-
 }
 .searchbar{
     display: flex;
     justify-content: center;
-    
 }
 
 #mySearch {
@@ -39,12 +38,11 @@ footer{
     border: none;
     box-shadow: 1px 1px 4px;
     border: 1px solid gray;
-  }
+}
 
-  .searchbarmydrinks{
+.searchbarmydrinks{
     display: flex;
     justify-content: left;
-    
 }
 
 #drinksSearch {
@@ -56,7 +54,7 @@ footer{
     border: none;
     box-shadow: 1px 1px 4px;
     border: 1px solid gray;
-  }
+}
 
 .nav{  
     display: flex;
@@ -178,7 +176,6 @@ footer{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-
 }
 
 .drinksoutput{
@@ -193,7 +190,6 @@ footer{
     border: 1px solid gray;
     display: flex;
     flex-direction: column;
-
 }
 
 .drinksoutput h3{
@@ -244,7 +240,6 @@ footer{
     display: flex;
     flex-direction: column;
     justify-content: center;
-
 }
 
 .drinksoutput1 h3{

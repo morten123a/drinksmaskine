@@ -25,164 +25,85 @@ function getActivatedFilters() {
         const ischecked = document.getElementById(id).checked;
         if (ischecked) {
             filters.push(value)
-        }
-    }
+        }}
     return filters
 }
 
-
 async function performFilterQuery() {
-    //Clear search bar
-    searchdrinks.value = ""
-    //get filters
-    const filters = getActivatedFilters()
-    //Send filter req
-    const responseData = await sendHttpGetRequest('/mydrinks_filter', {
-        filter: filters,
-
-    })
-
-    //show results
+    searchdrinks.value = "" //Clear search bar
+    const filters = getActivatedFilters() //get filters
+    const responseData = await sendHttpGetRequest('/mydrinks_filter', {  //Send filter req
+        filter: filters, }) // sender en request med navn filtter med filters inputet
     return responseData;
 }
 
-
-for (const { id, value } of checkboxTable) {
-    document.getElementById(id).addEventListener("change", () => {
-        console.log(getActivatedFilters())
-
-    });
-}
-
 function clearAllFilters() {
-    for (const { id } of checkboxTable) {
+    for (const { id } of checkboxTable) { //Går igennem alle checkboksene og fjerner ders værdi
         const checkbox = document.getElementById(id);
         if (checkbox) {
             checkbox.checked = false; // Fjern markeringen af checkboksen
-        }
-    }
-}
+}}}
 
-async function performSearchQueryFilter(){
-    const responseData1 = await sendHttpGetRequest('/search', {
-        // search: searchbar.value,
-        search: searchdrinks.value,
-    })
-    //tømmer search baren
-    searchdrinks.value = ""
-    console.log(responseData1)
+async function performSearchQueryFilter(){ //
+    const responseData1 = await sendHttpGetRequest('/search', { //henter dataen med brugerens data og returnere svaret
+        search: searchdrinks.value, }) 
+    searchdrinks.value = "" //tømmer search baren
     return responseData1
 }
 
-searchdrinks.addEventListener('keydown', function(event){
-    if (event.key === 'Enter'){
-        //her skal main function kørers
-        performSearchQueryFilter()
-    }
-})
-
 const filterslist = document.getElementById("apply-filters");
 filterslist.addEventListener('click', async () => {
-    console.log(getActivatedFilters())
     performFilterQuery()
     drinksoutput()
 });
 
-searchdrinks.addEventListener('keydown', function(event){
+searchdrinks.addEventListener('keydown', function(event){ //kører det i funktionen når brugeren trykker enter
     if (event.key === 'Enter'){
-        //her skal main function kørers
-        clearAllFilters()
-        performSearchQueryFilter()
-        drinksoutput2()
-        // console.log(performSearchQueryFilter())
-    }
-})
-
-
-// inside html 
-//  <div id="my-div"></div>
+        clearAllFilters() //fjerner alle filtre
+        performSearchQueryFilter() //henter dataen fra serveren
+        drinksoutput2() //laver outputet til brugeren
+}})
 
 async function drinksoutput() {
-
-
     const myoutput = document.getElementById("my-drinks");
-
     const outputdata = await performFilterQuery()
-
-    console.log(outputdata)    
-    for (const drink in outputdata) {
-        for (const i in outputdata[drink]) {
-        console.log(outputdata[drink][i])
-        }
-    }
-
     myoutput.innerHTML = Object.entries(outputdata)
         .map(([drinkName, ingredientsAndAmounts]) => {
-
             const ingredientsAndAmountsHtml = ingredientsAndAmounts
                 .map(({ingredient, amount}) => {
                     return `
                         <span class="colum">${ingredient} x ${amount}</span>
-                    `;
-                })
+                    `;})
                 .join("");
 
-            return `
+             return `
                  <div class="drinksoutput">
                      <h3>${drinkName}</h3>
                      <img src="/images/${drinkName}.png" alt=>
                      <div>${ingredientsAndAmountsHtml}</div>
                  </div>
-             `;
-        })
+             `;})
         .join("");
 }
 
 async function drinksoutput2() {
-
-
     const myoutput = document.getElementById("my-drinks");
-
     const outputdata = await performSearchQueryFilter()
-
-    console.log(outputdata)    
-    for (const drink in outputdata) {
-        for (const i in outputdata[drink]) {
-        console.log(outputdata[drink][i])
-        }
-    }
-
     myoutput.innerHTML = Object.entries(outputdata)
         .map(([drinkName, ingredientsAndAmounts]) => {
-
             const ingredientsAndAmountsHtml = ingredientsAndAmounts
                 .map(({ingredient, amount}) => {
                     return `
                         <span class="colum">${ingredient} x ${amount}</span>
-                    `;
-                })
+                    `;})
                 .join("");
-
-            return `
+            
+             return `
                  <div class="drinksoutput">
                      <h3>${drinkName}</h3>
                      <img src="/images/${drinkName}.png" alt=>
                      <div>${ingredientsAndAmountsHtml}</div>
                  </div>
-             `;
-        })
+             `;})
         .join("");
 }
-
-// inside html
-//  <div id="my-div">
-//      <div class="player" id="player-4">
-//          <p1>name is jeppe and lvl is 44</p1>
-//      </div>
-//      <div class="player" id="player-22">
-//          <p1>name is jeppe and lvl is 34</p1>
-//      </div>
-//      <div class="player" id="player-213123">
-//          <p1>name is morben and lvl is 9</p1>
-//      </div>
-//  </div>
