@@ -1,10 +1,6 @@
 import { sendHttpGetRequest } from "./common.js";
 
 const searchdrinks = document.getElementById("drinksSearch");
-searchdrinks.addEventListener('keypress', () => {
-    const value2 = searchdrinks.value
-    console.log(value2)
-})
 
 const checkboxTable = [
     { id: "checkbox-gin", value: "gin" },
@@ -23,10 +19,6 @@ const checkboxTable = [
     { id: "checkbox-æblejuice", value: "æblejuice" },
 ]
 
-
-
-
-
 function getActivatedFilters() {
     let filters = []
     for (const { id, value } of checkboxTable) {
@@ -37,6 +29,7 @@ function getActivatedFilters() {
     }
     return filters
 }
+
 
 async function performFilterQuery() {
     //Clear search bar
@@ -61,12 +54,49 @@ for (const { id, value } of checkboxTable) {
     });
 }
 
+function clearAllFilters() {
+    for (const { id } of checkboxTable) {
+        const checkbox = document.getElementById(id);
+        if (checkbox) {
+            checkbox.checked = false; // Fjern markeringen af checkboksen
+        }
+    }
+}
+
+async function performSearchQueryFilter(){
+    const responseData1 = await sendHttpGetRequest('/search', {
+        // search: searchbar.value,
+        search: searchdrinks.value,
+    })
+    //tømmer search baren
+    searchdrinks.value = ""
+    console.log(responseData1)
+    return responseData1
+}
+
+searchdrinks.addEventListener('keydown', function(event){
+    if (event.key === 'Enter'){
+        //her skal main function kørers
+        performSearchQueryFilter()
+    }
+})
+
 const filterslist = document.getElementById("apply-filters");
 filterslist.addEventListener('click', async () => {
     console.log(getActivatedFilters())
     performFilterQuery()
     drinksoutput()
 });
+
+searchdrinks.addEventListener('keydown', function(event){
+    if (event.key === 'Enter'){
+        //her skal main function kørers
+        clearAllFilters()
+        performSearchQueryFilter()
+        // console.log(performSearchQueryFilter())
+    }
+})
+
 
 // inside html 
 //  <div id="my-div"></div>

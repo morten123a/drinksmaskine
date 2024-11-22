@@ -26,13 +26,6 @@ def filter_handler(req, res, next):
     print(filter)
     return res.json(filter)
 
-# /search?drink_name=...
-def seach_handler2(req, res, next):
-    drink_name = req.query.drink_name #henter drink navnet som brugeres har søgt på
-    search_result = db.seach(dbcon, drink_name) #finder brugeres resultat
-    return res.json(search_result)
-
-
 def home(req, res, next):
     return res.sendfile("public/index.html")
 
@@ -44,7 +37,6 @@ app.get("/", home)
 app.get("/search", seach_handler)
 app.get("/mydrinks_deafult", deafult_handler)
 app.get("/mydrinks_filter", filter_handler)
-app.get("/mydrinks_seach", seach_handler2)
 app.get("/*", static_files)
 
 app.listen(3000)
