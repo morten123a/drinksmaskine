@@ -33,12 +33,13 @@ def default_display (conn):
     return  result
 
 def seach (conn, drink_name):
+    edited_drink_name = drink_name.replace('"', '')
     cursor = conn.cursor()
     cursor.execute(f"""
         SELECT ingredients.name, recipes_ingredients.amount, recipes.name FROM drinksdb.recipes_ingredients
 		LEFT JOIN drinksdb.ingredients ON drinksdb.recipes_ingredients.ingredients_id = drinksdb.ingredients.id
 		LEFT JOIN drinksdb.recipes ON drinksdb.recipes_ingredients.recipes_id = drinksdb.recipes.id
-		WHERE recipes.name = {drink_name}
+		WHERE recipes.name LIKE "%{edited_drink_name}%"
         """)
     rows = cursor.fetchall()
     result = {}
