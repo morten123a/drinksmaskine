@@ -93,6 +93,7 @@ searchdrinks.addEventListener('keydown', function(event){
         //her skal main function kørers
         clearAllFilters()
         performSearchQueryFilter()
+        drinksoutput2()
         // console.log(performSearchQueryFilter())
     }
 })
@@ -137,6 +138,41 @@ async function drinksoutput() {
         .join("");
 }
 
+async function drinksoutput2() {
+
+
+    const myoutput = document.getElementById("my-drinks");
+
+    const outputdata = await performSearchQueryFilter()
+
+    console.log(outputdata)    
+    for (const drink in outputdata) {
+        for (const i in outputdata[drink]) {
+        console.log(outputdata[drink][i])
+        }
+    }
+
+    myoutput.innerHTML = Object.entries(outputdata)
+        .map(([drinkName, ingredientsAndAmounts]) => {
+
+            const ingredientsAndAmountsHtml = ingredientsAndAmounts
+                .map(({ingredient, amount}) => {
+                    return `
+                        <span class="colum">${ingredient} x ${amount}</span>
+                    `;
+                })
+                .join("");
+
+            return `
+                 <div class="drinksoutput">
+                     <h3>${drinkName}</h3>
+                     <img src="/images/${drinkName}.png" alt=>
+                     <div>${ingredientsAndAmountsHtml}</div>
+                 </div>
+             `;
+        })
+        .join("");
+}
 
 // inside html
 //  <div id="my-div">
