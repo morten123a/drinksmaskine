@@ -182,7 +182,7 @@ footer{
 }
 
 .drinksoutput{
-    background-color: rgb(251, 0, 0);
+    background-color: rgb(0, 47, 187);
     display: flex;
     width: 200px;
     height: 350px;
@@ -198,15 +198,18 @@ footer{
 
 .drinksoutput h3{
     text-align: center ;
-
+    font-weight: bolder;
+    color: white;
 }
 
 .drinksoutput img{
     max-height: 200px;
+    margin: 2px;
 }
 
 .drinksoutput span{
     text-align: left;
+    color: white;
 }
 
 .colum{
@@ -218,4 +221,44 @@ footer{
     display: flex;
     flex-direction: row;
 
+}
+
+.drinksseach {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+
+
+.drinksoutput1 {
+    background-color: rgb(0, 47, 187);
+    display: flex;
+    width: 200px;
+    height: 350px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 4px;
+    border: 1px solid gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.drinksoutput1 h3{
+    text-align: center ;
+    font-weight: bolder;
+    color: white;
+}
+
+.drinksoutput1 img{
+    max-height: 200px;
+    margin: 2px;
+}
+
+.drinksoutput1 span{
+    text-align: left;
+    color: white;
 }
