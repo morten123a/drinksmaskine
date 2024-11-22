@@ -33,6 +33,7 @@ def default_display (conn):
     return  result
 
 def seach (conn, drink_name):
+    print (drink_name)
     edited_drink_name = drink_name.replace('"', '')
     cursor = conn.cursor()
     cursor.execute(f"""
