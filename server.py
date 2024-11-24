@@ -1,6 +1,5 @@
 from express_server import express
 import db #henter vores database request-handler
-#import glob        Dette er vist ikke vigtigt
 import json
 
 app = express()
