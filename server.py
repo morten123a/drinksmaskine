@@ -20,7 +20,7 @@ def home(req, res, next): #default siden
     return res.sendfile("public/index.html")
 
 def static_files(req, res, next): #gør det nemmere at hente filer for clienten
-    file_path = f"public{req.url}" #fortæller frontenden at vi bruger "public" som deafult directory
+    file_path = f"public{req.url}" #fortæller frontenden at vi bruger "public" som deafult directory og lader dem hente filer derefter
     return res.sendfile(file_path) #sender det til brugeren
 
 #fortæller backenden hvilket directory der skal køre den respektive function
