@@ -3,7 +3,7 @@ import mysql.connector
 # Databaseforbindelse
 def connect_db():
     conn = mysql.connector.connect(
-        host="172.21.114.12",               #host hvor databasen ligger      
+        host="172.21.113.55",               #host hvor databasen ligger      
         user="drinksmaster",           #username (drinksmaster)
         password="Eux20!",       #Password (Eux20!)
         database="drinksdb"        #database_name (Drinksdb)
