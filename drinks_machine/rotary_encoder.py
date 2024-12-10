@@ -16,13 +16,13 @@ class RotaryEncoder:
     def update(self) -> None:
         clkState = GPIO.input(self.clk)
         dtState = GPIO.input(self.dt)
-        if clkState != clkLastState:
+        if clkState != self.clkLastState:
                 if dtState != clkState:
                         self.rawCounter += 1
                 else:
                         self.rawCounter -= 1
                 print (self.rawCounter)
-        clkLastState = clkState
+        self.clkLastState = clkState
 
     def counter(self) -> int:
           return self.rawCounter / 2
