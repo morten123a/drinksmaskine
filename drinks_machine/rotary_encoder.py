@@ -17,11 +17,11 @@ class RotaryEncoder:
         clkState = GPIO.input(self.clk)
         dtState = GPIO.input(self.dt)
         if clkState != self.clkLastState:
-                if dtState != clkState:
-                        self.rawCounter += 1
-                else:
-                        self.rawCounter -= 1
-                print (self.rawCounter)
+            if dtState != clkState:
+                self.rawCounter += 1
+            else:
+                self.rawCounter -= 1
+            print(self.rawCounter)
         self.clkLastState = clkState
 
     def has_rotated_clockwise(self) -> bool:

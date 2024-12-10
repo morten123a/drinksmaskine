@@ -15,10 +15,6 @@ class DrinksMachine:
 
         # self.last_re_counter = self.rotary_encoder.counter()
     
-    def destroy_pumps(self):
-        for pump in self.pumps:
-            pump.destroy()
-
     def update(self) -> None:
         self.rotary_encoder.update()
 
@@ -42,4 +38,7 @@ class DrinksMachine:
         self.destroy_pumps()
         self.rotary_encoder.destroy()
 
+    def destroy_pumps(self):
+        for pump in self.pumps:
+            pump.destroy()
 
