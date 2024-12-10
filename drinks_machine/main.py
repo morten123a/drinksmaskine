@@ -1,10 +1,12 @@
 from drinks_machine import DrinksMachine
+from time import sleep 
 
 def main():
     drinks_machine = DrinksMachine()
     while True:
         try:
             drinks_machine.update()
+            sleep(0.05)
         except Exception as e:
             print(e)
             break

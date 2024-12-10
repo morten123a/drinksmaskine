@@ -29,7 +29,7 @@ class DrinksMachine:
         if self.rotary_encoder.has_rotated_counter_clockwise():
             print("rotated counter clockwise")
             self.rotary_encoder.reset()
-
+        
         # new_re_counter = self.rotary_encoder.counter()
         # if abs(self.last_re_counter - new_re_counter) == 1:
         #     print(f"last: {self.last_re_counter}")
