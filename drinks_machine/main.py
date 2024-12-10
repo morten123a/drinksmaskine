@@ -6,7 +6,6 @@ def main():
     while True:
         try:
             drinks_machine.update()
-            sleep(0.05)
         except Exception as e:
             print(e)
             break
