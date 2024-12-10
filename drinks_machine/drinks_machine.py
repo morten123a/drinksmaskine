@@ -34,12 +34,12 @@ class DrinksMachine:
             try:
                 self.update()
             except Exception as e:
-                self.destroy_pumps
+                self.destroy_pumps()
                 self.rotery_encoder.destroy()
                 print(e)
                 break
             except KeyboardInterrupt:
-                self.destroy_pumps
+                self.destroy_pumps()
                 self.rotery_encoder.destroy()
                 break
 
