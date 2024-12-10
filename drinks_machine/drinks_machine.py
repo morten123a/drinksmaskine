@@ -12,7 +12,7 @@ class DrinksIdSelector:
         self.current_id += 1
 
     def prev_drink(self) -> None:
-        self.current_id += 1
+        self.current_id -= 1
 
 class DrinksMachine:
     def __init__(self):
