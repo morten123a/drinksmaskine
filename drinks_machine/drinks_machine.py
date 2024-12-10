@@ -22,28 +22,24 @@ class DrinksMachine:
     def update(self) -> None:
         self.rotary_encoder.update()
 
-        new_re_counter = self.rotary_encoder.counter()
-        if abs(self.last_re_counter - new_re_counter) == 1:
-            print(f"last: {self.last_re_counter}")
-            print(f"new: {new_re_counter}")
-            sleep(0.05)
-            self.pumps[0].start(0.5)
-            self.last_re_counter = new_re_counter
+        if self.rotary_encoder.has_rotated_clockwise():
+            print("rotated clockwise")
+            self.rotary_encoder.reset()
+            
+        if self.rotary_encoder.has_rotated_counter_clockwise():
+            print("rotated counter clockwise")
+            self.rotary_encoder.reset()
 
-    def run(self):
-        while True:
-            try:
-                self.update()
-            except Exception as e:
-                print("shutting down gracefully...")
-                self.destroy_pumps()
-                self.rotary_encoder.destroy()
-                print(e)
-                break
-            except KeyboardInterrupt:
-                print("shutting down gracefully...")
-                self.destroy_pumps()
-                self.rotary_encoder.destroy()
-                break
+        # new_re_counter = self.rotary_encoder.counter()
+        # if abs(self.last_re_counter - new_re_counter) == 1:
+        #     print(f"last: {self.last_re_counter}")
+        #     print(f"new: {new_re_counter}")
+        #     sleep(0.05)
+        #     self.pumps[0].start(0.5)
+        #     self.last_re_counter = new_re_counter
+
+    def destroy(self) -> None:
+        self.destroy_pumps()
+        self.rotary_encoder.destroy()
 
 

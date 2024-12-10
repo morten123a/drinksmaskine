@@ -24,8 +24,14 @@ class RotaryEncoder:
                 print (self.rawCounter)
         self.clkLastState = clkState
 
-    def counter(self) -> int:
-          return self.rawCounter / 2
+    def has_rotated_clockwise(self) -> bool:
+        self.rawCounter >= 2
+
+    def has_rotated_counter_clockwise(self) -> bool:
+        self.rawCounter >= -2
+
+    def reset(self):
+        self.rawCounter = 0
     
     def destroy(self):
         GPIO.cleanup()
