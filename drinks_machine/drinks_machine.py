@@ -23,7 +23,7 @@ class DrinksMachine:
         self.rotary_encoder.update()
 
         new_re_counter = self.rotary_encoder.counter()
-        if self.last_re_counter != new_re_counter:
+        if abs(self.last_re_counter - new_re_counter) == 1:
             print(f"last: {self.last_re_counter}")
             print(f"new: {new_re_counter}")
             sleep(0.05)
