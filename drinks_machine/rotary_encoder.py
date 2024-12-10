@@ -26,6 +26,11 @@ class RotaryEncoder:
 
     def counter(self) -> int:
           return self.rawCounter / 2
+    
+    def destroy(self):
+        GPIO.cleanup()
+        
+
 
 
 

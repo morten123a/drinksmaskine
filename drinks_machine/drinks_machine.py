@@ -17,6 +17,10 @@ class DrinksMachine:
 
         self.last_re_counter = self.rotery_encoder.counter()
     
+    def destroy_pumps(self):
+        for pump in self.pumps:
+            pump.destroy()
+
     def update(self) -> None:
         self.rotery_encoder.update()
 
@@ -30,8 +34,13 @@ class DrinksMachine:
             try:
                 self.update()
             except Exception as e:
+                self.destroy_pumps
+                self.rotery_encoder.destroy()
                 print(e)
                 break
             except KeyboardInterrupt:
+                self.destroy_pumps
+                self.rotery_encoder.destroy()
                 break
+
 

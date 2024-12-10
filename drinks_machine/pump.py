@@ -12,3 +12,7 @@ class Pump:
         self.led_line.set_value(1)
         sleep(time_in_seconds)
         self.led_line.set_value(0)
+
+    def destroy(self):
+        self.led_line.release()
+        
