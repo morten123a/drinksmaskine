@@ -32,11 +32,13 @@ class DrinksMachine:
             self.drinks_id_sel.next_drink()
             print("rotated clockwise")
             self.rotary_encoder.reset()
+            print(f"current drink id = {self.drink_id_sel.current_id}")
             
         if self.rotary_encoder.has_rotated_counter_clockwise():
             self.drinks_id_sel.prev_drink()
             print("rotated counter clockwise")
             self.rotary_encoder.reset()
+            print(f"current drink id = {self.drink_id_sel.current_id}")
 
     def destroy(self) -> None:
         self.destroy_pumps()
