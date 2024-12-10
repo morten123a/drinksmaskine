@@ -23,12 +23,11 @@ class DrinksMachine:
         self.rotary_encoder.update()
 
         new_re_counter = self.rotary_encoder.counter()
-        print(self.last_re_counter)
-        print(new_re_counter)
         if self.last_re_counter != new_re_counter:
+            print(f"last: {self.last_re_counter}")
+            print(f"new: {new_re_counter}")
             sleep(0.05)
             self.pumps[0].start(0.5)
-            pass
 
     def run(self):
         while True:
