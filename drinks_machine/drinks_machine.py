@@ -11,7 +11,7 @@ class DrinksIdSelector:
     def next_drink(self) -> None:
         self.current_id += 1
         if self.current_id > 10:
-            self.current_id == 0
+            self.current_id = 0
 
     def prev_drink(self) -> None:
         self.current_id -= 1
