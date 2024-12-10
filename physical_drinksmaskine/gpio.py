@@ -3,8 +3,8 @@ from time import sleep
 import gpiod
 
 #This is testet and is working
-clk =17
-dt =18
+clk = 17
+dt = 18
 SW = 22
 PUMP1_PIN = 26
 
