@@ -28,6 +28,7 @@ class DrinksMachine:
             print(f"new: {new_re_counter}")
             sleep(0.05)
             self.pumps[0].start(0.5)
+            self.last_re_counter = new_re_counter
 
     def run(self):
         while True:
