@@ -13,7 +13,7 @@ class DrinksMachine:
         self.display = Display()
         self.rotary_encoder = RotaryEncoder()
 
-        self.last_re_counter = self.rotary_encoder.counter()
+        # self.last_re_counter = self.rotary_encoder.counter()
     
     def destroy_pumps(self):
         for pump in self.pumps:
