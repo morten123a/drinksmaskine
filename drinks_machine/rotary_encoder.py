@@ -28,7 +28,7 @@ class RotaryEncoder:
         self.rawCounter >= 2
 
     def has_rotated_counter_clockwise(self) -> bool:
-        self.rawCounter >= -2
+        self.rawCounter <= -2
 
     def reset(self):
         self.rawCounter = 0
