@@ -36,14 +36,14 @@ class Database:
                     LEFT JOIN drinksdb.recipes ON drinksdb.recipes_ingredients.recipes_id = drinksdb.recipes.id
                     WHERE ingredients.availability = TRUE  """
             cursor.execute(query)
+            rows = cursor.fetchall()
             max_value = 0
             # Hent resultater
-            self.result = cursor.fetchall()
-            for row in self.rows: #segmentere dataen i navnende, i row 2
-                self.result[row[2]] = []
+
+            rows_filtered = self.filter_sql_output(rows)
+            for i in rows_filtered:
                 max_value += 1
-            
-            
+                
             print(f"this is the max: {max_value}")
             return max_value
 
@@ -55,9 +55,9 @@ class Database:
                     WHERE ingredients.availability = TRUE   """
             cursor.execute(query)
             # Hent resultater
-            self.rows = cursor.fetchall
+            rows = cursor.fetchall
             
-            return self.filter_sql_output(self.rows)
+            return self.filter_sql_output(rows)
 
 
 
