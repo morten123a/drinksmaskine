@@ -15,17 +15,16 @@ class Database:
         self.conn.commit()
 
     def max_value(self):
-        cursor = self.conn.cursor()
-        
-        query = """select MAX(id) AS min_price FROM recipes"""
-        cursor.execute(query)
+        with self.conn.cursor() as cursor:
+            
+            query = """select MAX(id) AS min_price FROM recipes"""
+            cursor.execute(query)
 
-        # Hent resultater
-        result = cursor.fetchone()
-        max_value = result
-        max_value = int(max_value[0])
-        print(f"Sidste drink: {max_value}")
+            # Hent resultater
+            result = cursor.fetchone()
+            max_value = result
+            max_value = int(max_value[0])
+            print(f"Sidste drink: {max_value}")
 
-        # Luk forbindelse
-        cursor.close()
+            return max_value
 
