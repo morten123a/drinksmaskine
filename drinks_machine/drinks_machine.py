@@ -19,7 +19,8 @@ class DrinksIdSelector:
         if self.current_id < 0:
             self.current_id = self.max_id
 
-    def set_max_id(self, id: int) -> None:
+    def set_max_id(self, id) -> None:
+        print(f"Sidste drink {id}")
         self.max_id = id
 
 class DrinksMachine:
