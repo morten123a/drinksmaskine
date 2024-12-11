@@ -30,6 +30,9 @@ class RotaryEncoder:
     def has_rotated_counter_clockwise(self) -> bool:
         return self.rawCounter >= 2
 
+    def has_been_clicked(self) -> bool:
+        return GPIO.input(self.sw) == GPIO.HIGH
+
     def reset(self):
         self.rawCounter = 0
     

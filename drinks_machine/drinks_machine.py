@@ -22,10 +22,10 @@ class DrinksIdSelector:
     def set_max_id(self, id) -> None:
         self.max_id = id
 
-    def get_current_id_Write_display(self):
-        print(f"current drink = {self.database.current_available_drinks([self.drinks_id_sel.current_id]["name"])}")
-        self.drink_name = self.database.current_available_drinks([self.drinks_id_sel.current_id]["name"])
-        self.display.write_ingredients_on_screen(self.drink_name,self.drinks_id_sel.current_id)
+    # def get_current_id_Write_display(self):
+    #     print(f"current drink = {self.database.current_available_drinks([self.drinks_id_sel.current_id]["name"])}")
+    #     self.drink_name = self.database.current_available_drinks([self.drinks_id_sel.current_id]["name"])
+    #     self.display.write_ingredients_on_screen(self.drink_name,self.drinks_id_sel.current_id)
    
 
 
@@ -34,6 +34,9 @@ class DrinksMachine:
     def __init__(self):
         self.database = Database()
         self.pumps = [
+            Pump(pin=26), 
+            Pump(pin=26), 
+            Pump(pin=26), 
             Pump(pin=26), 
         ]
         self.display = Display()
@@ -58,11 +61,39 @@ class DrinksMachine:
             print("rotated counter clockwise")
             self.rotary_encoder.reset()
             self.get_current_id_Write_display()
-
+        
+        if self.rotary_encoder.has_been_clicked():
+            self.dispense()
+    
     def get_current_id_Write_display(self):
         print(f"current drink = {self.database.current_available_drinks([self.drinks_id_sel.current_id]["name"])}")
         self.drink_name = self.database.current_available_drinks([self.drinks_id_sel.current_id]["name"])
         self.display.write_ingredients_on_screen(self.drink_name,self.drinks_id_sel.current_id)
+
+    def dispense(self):
+        #vide hvor meget den skal pumpe
+        for ingredient in self.database.current_available_drinks([self.drinks_id_sel.current_id]["ingredients"]):
+            number_of_ingredient = 0
+            self.amount = self.database.current_available_drinks([self.drinks_id_sel.current_id]["ingredients"][number_of_ingredient]["amount"])
+            match ingredient:
+                case 'gin':
+                    self.pumps[0].start(self.amount)
+                    
+                case 'mango sirup':
+                    self.pumps[1].start(self.amount)
+
+                case 'vodka':
+                    self.pumps[2].start(self.amount)
+
+                case 'din mor': #kan ikke huske det!!!!
+                    self.pumps[3].start(self.amount)
+
+                case _:
+                    self.display.get_extra_drink(ingredient, self.amount)
+            number_of_ingredient += 1
+        #sende informationen til den rigtige pumpe x
+        #?status på display? x
+        #fjern mængden fra databasen
 
     def destroy(self) -> None:
         self.destroy_pumps()

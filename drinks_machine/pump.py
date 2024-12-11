@@ -5,14 +5,16 @@ class Pump:
     def __init__(self, pin):
         self.pin = pin
         self.chip = gpiod.Chip('gpiochip4')
-        self.led_line = self.chip.get_line(self.pin)
-        self.led_line.request(consumer="PUMP1", type=gpiod.LINE_REQ_DIR_OUT)
+        self.pump_line = self.chip.get_line(self.pin)
+        self.pump_line.request(consumer="PUMP", type=gpiod.LINE_REQ_DIR_OUT)
 
-    def start(self, time_in_seconds: int):
-        self.led_line.set_value(1)
-        sleep(time_in_seconds)
-        self.led_line.set_value(0)
+    def start(self, centiliters):
+        ratio = 5       #Tiden en pumpe tager for at udlevere 1 centiliter
+        pouringtime = centiliters * ratio
+        self.pump_line.set_value(1)
+        sleep(pouringtime)
+        self.pump_line.set_value(0)
 
     def destroy(self):
-        self.led_line.release()
+        self.pump_line.release()
         

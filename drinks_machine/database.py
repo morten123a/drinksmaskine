@@ -72,7 +72,8 @@ class Database:
 
 
 
-    def subtract_poured_amount(self):
+    def subtract_poured_amount(self, input, amount):
+        
         #skal hente mængden
         #fjerne den mængde fra databasen
         #sæt flasken til "false" når den er tom
