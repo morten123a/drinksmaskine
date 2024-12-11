@@ -17,14 +17,11 @@ class Database:
                     continue
                 result[recipe_name].append({"ingredient": row[0], "amount": row[1]}) #sætter dataen pænt op, så det er læseligt
         
-        result2 = []
-        for name in result:
-            result2.append({"name": name, "ingredients": result[name]})
 
-        print(json.dumps(result))
-        print(json.dumps(result2))
-        print(json.dumps(result2[0]["name"]))
-        print(json.dumps(result2[0]["ingredients"]))
+        # print(json.dumps(result))
+        # print(json.dumps(result2))
+        # print(json.dumps(result2[0]["name"]))
+        # print(json.dumps(result2[0]["ingredients"]))
         return  result #resultatet af funktionen
 
     
@@ -65,8 +62,12 @@ class Database:
             cursor.execute(query)
             # Hent resultater
             rows = cursor.fetchall
-            
-            return self.filter_sql_output(rows)
+            result = self.filter_sql_output(rows)
+            result = []
+            for name in result:
+                result.append({"name": name, "ingredients": result[name]})
+
+            return result 
 
 
 

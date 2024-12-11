@@ -6,7 +6,7 @@ from time import sleep
 
 class DrinksIdSelector:
     def __init__(self) -> None:
-        self.current_id = 2
+        self.current_id = 1
         self.max_id = 10
 
     def next_drink(self) -> None:
@@ -43,13 +43,13 @@ class DrinksMachine:
             self.drinks_id_sel.next_drink()
             print("rotated clockwise")
             self.rotary_encoder.reset()
-            print(f"current drink id = {self.drinks_id_sel.current_id}")
+            print(f"current drink = {self.database.current_available_drinks([self.drinks_id_sel.current_id]["name"])}")
             
         if self.rotary_encoder.has_rotated_counter_clockwise():
             self.drinks_id_sel.prev_drink()
             print("rotated counter clockwise")
             self.rotary_encoder.reset()
-            print(f"current drink id = {self.drinks_id_sel.current_id}")
+            print(f"current drink = {self.database.current_available_drinks([self.drinks_id_sel.current_id]["name"])}")
 
     def destroy(self) -> None:
         self.destroy_pumps()
