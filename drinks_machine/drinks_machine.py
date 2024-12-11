@@ -7,7 +7,7 @@ from time import sleep
 class DrinksIdSelector:
     def __init__(self) -> None:
         self.current_id = 0
-        self.last_id = Database.max_value()
+        self.last_id = Database().max_value()
 
     def next_drink(self) -> None:
         self.current_id += 1
