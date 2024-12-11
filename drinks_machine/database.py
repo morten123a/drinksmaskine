@@ -19,12 +19,12 @@ class Database:
         
         result2 = []
         for name in result:
-            result2.append({"name":name, "ingredients":result[name]})
+            result2.append({"name": name, "ingredients": result[name]})
 
         print(json.dumps(result))
         print(json.dumps(result2))
-        print(json.dumps(result2[0].name))
-        print(json.dumps(result2[0].ingredients))
+        print(json.dumps(result2[0]["name"]))
+        print(json.dumps(result2[0]["ingredients"]))
         return  result #resultatet af funktionen
 
     
