@@ -23,7 +23,7 @@ class Database:
         # Hent resultater
         result = cursor.fetchone()
         max_price = result
-
+        max_price = max_price.replace('(,)','')
         print(f"Sidste drink: {max_price}")
 
         # Luk forbindelse
