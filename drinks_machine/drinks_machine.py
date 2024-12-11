@@ -7,20 +7,20 @@ from time import sleep
 class DrinksIdSelector:
     def __init__(self) -> None:
         self.current_id = 0
-        self.last_id = Database().max_value()
+        self.max_id = 10
 
     def next_drink(self) -> None:
         self.current_id += 1
-        if self.current_id > self.last_id:
+        if self.current_id > self.max_id:
             self.current_id = 0
 
     def prev_drink(self) -> None:
         self.current_id -= 1
         if self.current_id < 0:
-            self.current_id = self.last_id
+            self.current_id = self.max_id
 
-    def set_last_id(self, id: int) -> None:
-        self.last_id = id
+    def set_max_id(self, id: int) -> None:
+        self.max_id = id
 
 class DrinksMachine:
     def __init__(self):
@@ -32,6 +32,9 @@ class DrinksMachine:
         self.rotary_encoder = RotaryEncoder()
 
         self.drinks_id_sel = DrinksIdSelector()
+
+        self.database.connect_db()
+        self.drinks_id_sel.set_max_id(self.database.max_value())
 
     def update(self) -> None:
         self.rotary_encoder.update()
