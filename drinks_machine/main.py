@@ -1,5 +1,4 @@
 from drinks_machine import DrinksMachine
-from time import sleep 
 
 def main():
     drinks_machine = DrinksMachine()
