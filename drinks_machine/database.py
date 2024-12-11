@@ -17,7 +17,7 @@ class Database:
     def max_value(self):
         cursor = self.conn.cursor()
         
-        query = "MIN(id) AS min_price FROM recipes"
+        query = """select MAX(id) AS min_price FROM recipes"""
         cursor.execute(query)
 
         # Hent resultater
