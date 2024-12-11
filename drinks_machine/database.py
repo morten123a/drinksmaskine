@@ -13,9 +13,8 @@ class Database:
             database="drinksdb"        #database_name (Drinksdb)
         )
         self.conn.commit()
-        return self.conn
 
-    def max_value(self, conn):
+    def max_value(self):
         cursor = self.conn.cursor()
         
         query = "MIN(id) AS min_price FROM recipes"
