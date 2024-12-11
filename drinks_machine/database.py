@@ -1,5 +1,5 @@
 import mysql.connector
-
+import json
 
 class Database:
     def __init__(self):
@@ -16,6 +16,8 @@ class Database:
                 if recipe_name != row[2]:# hvis recipe navnet != navnene, da der ikke skal være navne i returværdien
                     continue
                 result[recipe_name].append({"ingredient": row[0], "amount": row[1]}) #sætter dataen pænt op, så det er læseligt
+        
+        print(json.dump(result))
         return  result #resultatet af funktionen
 
     
@@ -43,7 +45,7 @@ class Database:
             rows_filtered = self.filter_sql_output(rows)
             for i in rows_filtered:
                 max_value += 1
-                
+
             print(f"this is the max: {max_value}")
             return max_value
 
