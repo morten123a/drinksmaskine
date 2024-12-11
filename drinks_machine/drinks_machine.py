@@ -22,6 +22,14 @@ class DrinksIdSelector:
     def set_max_id(self, id) -> None:
         self.max_id = id
 
+    def get_current_id_Write_display(self):
+        print(f"current drink = {self.database.current_available_drinks([self.drinks_id_sel.current_id]["name"])}")
+        self.drink_name = self.database.current_available_drinks([self.drinks_id_sel.current_id]["name"])
+        self.display.write_ingredients_on_screen(self.drink_name,self.drinks_id_sel.current_id)
+   
+
+
+
 class DrinksMachine:
     def __init__(self):
         self.database = Database()
@@ -43,17 +51,23 @@ class DrinksMachine:
             self.drinks_id_sel.next_drink()
             print("rotated clockwise")
             self.rotary_encoder.reset()
-            print(f"current drink = {self.database.current_available_drinks([self.drinks_id_sel.current_id]["name"])}")
-            
+            self.get_current_id_Write_display()
+
         if self.rotary_encoder.has_rotated_counter_clockwise():
             self.drinks_id_sel.prev_drink()
             print("rotated counter clockwise")
             self.rotary_encoder.reset()
-            print(f"current drink = {self.database.current_available_drinks([self.drinks_id_sel.current_id]["name"])}")
+            self.get_current_id_Write_display()
+
+    def get_current_id_Write_display(self):
+        print(f"current drink = {self.database.current_available_drinks([self.drinks_id_sel.current_id]["name"])}")
+        self.drink_name = self.database.current_available_drinks([self.drinks_id_sel.current_id]["name"])
+        self.display.write_ingredients_on_screen(self.drink_name,self.drinks_id_sel.current_id)
 
     def destroy(self) -> None:
         self.destroy_pumps()
         self.rotary_encoder.destroy()
+        self.display.destroy()
 
     def destroy_pumps(self):
         for pump in self.pumps:
