@@ -22,9 +22,9 @@ class Database:
 
         # Hent resultater
         result = cursor.fetchone()
-        max_price = result
-        max_price = max_price.replace('(,)','')
-        print(f"Sidste drink: {max_price}")
+        max_value = result
+        max_value = int(max_value[0])
+        print(f"Sidste drink: {max_value}")
 
         # Luk forbindelse
         cursor.close()
