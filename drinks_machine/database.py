@@ -17,7 +17,12 @@ class Database:
                     continue
                 result[recipe_name].append({"ingredient": row[0], "amount": row[1]}) #sætter dataen pænt op, så det er læseligt
         
+        result2 = []
+        for name in result:
+            result2.append({"name":name, "ingredients":result[name]})
+
         print(json.dumps(result))
+        print(json.dumps(result2))
         return  result #resultatet af funktionen
 
     
