@@ -6,17 +6,17 @@ from time import sleep
 
 class DrinksIdSelector:
     def __init__(self) -> None:
-        self.current_id = 0
+        self.current_id = 1
         self.max_id = 10
 
     def next_drink(self) -> None:
         self.current_id += 1
         if self.current_id > self.max_id:
-            self.current_id = 0
+            self.current_id = 1
 
     def prev_drink(self) -> None:
         self.current_id -= 1
-        if self.current_id < 0:
+        if self.current_id < 1:
             self.current_id = self.max_id
 
     def set_max_id(self, id):
