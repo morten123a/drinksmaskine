@@ -1,5 +1,5 @@
 import mysql.connector
-from drinks_machine import DrinksMachine
+
 
 class Database:
     def __init__(self):
