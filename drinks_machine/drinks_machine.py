@@ -6,7 +6,7 @@ from time import sleep
 
 class DrinksIdSelector:
     def __init__(self) -> None:
-        self.current_id = 1
+        self.current_id = 2
         self.max_id = 10
 
     def next_drink(self) -> None:
@@ -19,8 +19,7 @@ class DrinksIdSelector:
         if self.current_id < 1:
             self.current_id = self.max_id
 
-    def set_max_id(self, id):
-        print(f"Sidste drink {id}")
+    def set_max_id(self, id) -> None:
         self.max_id = id
 
 class DrinksMachine:
