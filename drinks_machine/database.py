@@ -23,6 +23,8 @@ class Database:
 
         print(json.dumps(result))
         print(json.dumps(result2))
+        print(json.dumps(result2[0].name))
+        print(json.dumps(result2[0].ingredients))
         return  result #resultatet af funktionen
 
     
