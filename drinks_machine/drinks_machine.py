@@ -79,7 +79,7 @@ class DrinksMachine:
             self.amount = self.database.current_available_drinks()[self.drinks_id_sel.current_id]["ingredients"][number_of_ingredient]["amount"]
             print(json.dumps(ingredient["ingredient"]))
             # print(f"There is {self.amount} of {ingredient[0]["ingredient"]}")
-            self.subtraction = self.database.subtract_poured_amount(ingredient, self.amount)
+            self.subtraction = self.database.subtract_poured_amount(ingredient["ingredient"], self.amount)
             match ingredient:
                 case 'gin':
                     self.pumps[0].start(self.amount)
@@ -98,7 +98,7 @@ class DrinksMachine:
                     self.subtraction
 
                 case _:
-                    self.display.get_extra_drink(ingredient, self.amount)
+                    self.display.get_extra_drink(ingredient["ingredient"], self.amount)
                     self.subtraction
             number_of_ingredient += 1
         #sende informationen til den rigtige pumpe x
