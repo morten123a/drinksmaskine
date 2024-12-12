@@ -1,12 +1,13 @@
 from drinks_machine import DrinksMachine
+import traceback
 
 def main():
     drinks_machine = DrinksMachine()
     while True:
         try:
             drinks_machine.update()
-        except Exception as e:
-            print(e)
+        except Exception:
+            traceback.print_exc()
             break
         except KeyboardInterrupt:
             break
