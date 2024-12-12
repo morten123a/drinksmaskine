@@ -6,13 +6,13 @@ from time import sleep
 
 class DrinksIdSelector:
     def __init__(self) -> None:
-        self.current_id = 1
+        self.current_id = 0
         self.max_id = 10
 
     def next_drink(self) -> None:
         self.current_id += 1
         if self.current_id > self.max_id:
-            self.current_id = 1
+            self.current_id = 0
 
     def prev_drink(self) -> None:
         self.current_id -= 1
@@ -21,6 +21,7 @@ class DrinksIdSelector:
 
     def set_max_id(self, id) -> None:
         self.max_id = id
+        self.max_id -= 1
 
     # def get_current_id_Write_display(self):
     #     print(f"current drink = {self.database.current_available_drinks([self.drinks_id_sel.current_id]["name"])}")
