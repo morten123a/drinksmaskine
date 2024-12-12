@@ -3,7 +3,7 @@ from display import Display
 from pump import Pump 
 from rotary_encoder import RotaryEncoder
 from time import sleep 
-
+import json
 class DrinksIdSelector:
     def __init__(self) -> None:
         self.current_id = 0
@@ -77,7 +77,8 @@ class DrinksMachine:
         for ingredient in self.database.current_available_drinks()[self.drinks_id_sel.current_id]["ingredients"]:
             number_of_ingredient = 0
             self.amount = self.database.current_available_drinks()[self.drinks_id_sel.current_id]["ingredients"][number_of_ingredient]["amount"]
-            print(f"There is {self.amount} of {ingredient[0]["ingredient"]}")
+            print(json.dumps(ingredient[0]["ingredient"]))
+            # print(f"There is {self.amount} of {ingredient[0]["ingredient"]}")
             self.subtraction = self.database.subtract_poured_amount(ingredient, self.amount)
             match ingredient:
                 case 'gin':
