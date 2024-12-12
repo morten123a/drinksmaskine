@@ -16,7 +16,7 @@ class Display:
         self.lcd.text(f"{input}", 1)
         self.lcd.text(f"{id}", 2)
         self.lcd.text("Kæft jeg er god", 3)
-        pause()
+
 
     def get_extra_drink(self, input, amount):
         signal(SIGTERM, self.safe_exit)
