@@ -80,7 +80,7 @@ class Database:
                 WHERE ingredients.name = '{input}';
                 """
             cursor.execute(query)
-            total_amount = cursor.fetchone()
+            total_amount = cursor.fetchone()[0]
             print(total_amount)
             return total_amount
 
