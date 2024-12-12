@@ -35,9 +35,9 @@ class DrinksMachine:
         self.database = Database()
         self.pumps = [
             Pump(pin=26), 
-            Pump(pin=26), 
-            Pump(pin=26), 
-            Pump(pin=26), 
+            Pump(pin=16), 
+            Pump(pin=19), 
+            Pump(pin=13), 
         ]
         self.display = Display()
         self.rotary_encoder = RotaryEncoder()
@@ -66,7 +66,7 @@ class DrinksMachine:
             self.dispense()
     
     def get_current_id_Write_display(self):
-        print(f"current drink = {self.database.current_available_drinks([self.drinks_id_sel.current_id]["name"])}")
+        #print(f"current drink = {self.database.current_available_drinks([self.drinks_id_sel.current_id]["name"])}")
         self.drink_name = self.database.current_available_drinks([self.drinks_id_sel.current_id]["name"])
         self.display.write_ingredients_on_screen(self.drink_name,self.drinks_id_sel.current_id)
 
@@ -75,21 +75,27 @@ class DrinksMachine:
         for ingredient in self.database.current_available_drinks([self.drinks_id_sel.current_id]["ingredients"]):
             number_of_ingredient = 0
             self.amount = self.database.current_available_drinks([self.drinks_id_sel.current_id]["ingredients"][number_of_ingredient]["amount"])
+            self.subtraction = self.database.subtract_poured_amount(ingredient, self.amount)
             match ingredient:
                 case 'gin':
                     self.pumps[0].start(self.amount)
+                    self.subtraction
                     
                 case 'mango sirup':
                     self.pumps[1].start(self.amount)
+                    self.subtraction
 
                 case 'vodka':
                     self.pumps[2].start(self.amount)
+                    self.subtraction
 
-                case 'din mor': #kan ikke huske det!!!!
+                case 'likoer43': 
                     self.pumps[3].start(self.amount)
+                    self.subtraction
 
                 case _:
                     self.display.get_extra_drink(ingredient, self.amount)
+                    self.subtraction
             number_of_ingredient += 1
         #sende informationen til den rigtige pumpe x
         #?status på display? x

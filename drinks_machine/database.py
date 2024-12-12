@@ -16,8 +16,6 @@ class Database:
                 if recipe_name != row[2]:# hvis recipe navnet != navnene, da der ikke skal være navne i returværdien
                     continue
                 result[recipe_name].append({"ingredient": row[0], "amount": row[1]}) #sætter dataen pænt op, så det er læseligt
-        
-
         # print(json.dumps(result))
         # print(json.dumps(result2))
         # print(json.dumps(result2[0]["name"]))
@@ -61,7 +59,7 @@ class Database:
                     WHERE ingredients.availability = TRUE   """
             cursor.execute(query)
             # Hent resultater
-            rows = cursor.fetchall
+            rows = cursor.fetchall()
             result = self.filter_sql_output(rows)
             result = []
             for name in result:
@@ -70,10 +68,36 @@ class Database:
             return result 
 
 
+    def get_total_amount(self,input):
+        with self.conn.cursor() as cursor:
+            query=f"""
+                SELECT ingredients.amount FROM ingredients
+                WHERE ingredients.name = '{input}';
+                """
+            cursor.execute(query)
+            self.total_amount = cursor.fetchone()
+
 
 
     def subtract_poured_amount(self, input, amount):
-        
+        with self.conn.cursor() as cursor:
+            self.get_total_amount(input) 
+            query= f""" 
+                UPDATE ingredients
+                SET amount = {self.total_amount} - {amount}
+                WHERE NAME = '{input}';   
+                """
+            cursor.execute(query)
+
+            if self.total_amount <=0 :
+                query= f""" 
+                    UPDATE ingredients
+                    SET availability = 0
+                    WHERE NAME = '{input}';   
+                    """
+                cursor.execute(query)
+
+        # Hent resultater
         #skal hente mængden
         #fjerne den mængde fra databasen
         #sæt flasken til "false" når den er tom
