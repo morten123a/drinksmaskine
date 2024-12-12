@@ -65,7 +65,7 @@ class DrinksMachine:
         
         if self.rotary_encoder.has_been_clicked():
             self.dispense()
-            self.number_of_ingredient = 0
+            
 
     def get_current_id_Write_display(self):
         #print(f"current drink = {self.database.current_available_drinks([self.drinks_id_sel.current_id]["name"])}")
@@ -77,6 +77,7 @@ class DrinksMachine:
         #vide hvor meget den skal pumpe
         for ingredient in self.database.current_available_drinks()[self.drinks_id_sel.current_id]["ingredients"]:
             print(json.dumps(ingredient))
+            self.number_of_ingredient = 1
             self.amount = self.database.current_available_drinks()[self.drinks_id_sel.current_id]["ingredients"][self.number_of_ingredient]["amount"]
             
             print(self.number_of_ingredient)
