@@ -80,7 +80,7 @@ class Database:
                 WHERE ingredients.name = '{input}';
                 """
             cursor.execute(query)
-            total_amount = cursor.fetchone()[0]
+            total_amount = cursor.fetchone()
             print(total_amount)
             return total_amount
 
@@ -99,7 +99,7 @@ class Database:
             print(query)
             cursor.execute(query)
 
-            if self.total_amount >=0 :
+            if total_amount >=0 :
                 query= f""" 
                     UPDATE ingredients
                     SET availability = 0
