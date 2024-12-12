@@ -65,6 +65,10 @@ class Database:
             for name in result:
                 result.append({"name": name, "ingredients": result[name]})
 
+            print(json.dumps(result))
+            print(json.dumps(result[0]["name"]))
+            print(json.dumps(result[0]["ingredients"]))
+
             return result 
 
 
