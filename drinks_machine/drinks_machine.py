@@ -102,7 +102,7 @@ class DrinksMachine:
                 case _:
                     self.display.get_extra_drink(ingredient["ingredient"], self.amount)
                     self.subtraction
-        self.drinks_id_sel.current_id = 0
+        
         #sende informationen til den rigtige pumpe x
         #?status på display? x
         #fjern mængden fra databasen
