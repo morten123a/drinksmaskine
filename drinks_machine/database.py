@@ -90,18 +90,18 @@ class Database:
             query= f""" 
                 UPDATE ingredients
                 SET amount = {self.total_amount} - {amount}
-                WHERE NAME = '{input}';   
+                WHERE NAME = ' {input} ';   
                 """
             cursor.execute(query)
 
-            if self.total_amount <=0 :
+            if self.total_amount >=0 :
                 query= f""" 
                     UPDATE ingredients
                     SET availability = 0
-                    WHERE NAME = '{input}';   
+                    WHERE NAME = ' {input} ';   
                     """
                 cursor.execute(query)
-
+            print("Database succesfully changed")
         # Hent resultater
         #skal hente mængden
         #fjerne den mængde fra databasen
