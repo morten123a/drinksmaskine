@@ -10,6 +10,7 @@ class Display:
         exit(1)
 
     def write_ingredients_on_screen(self, input, id):
+        self.lcd.clear()
         signal(SIGTERM, self.safe_exit)
         signal(SIGHUP, self.safe_exit)
 
@@ -19,6 +20,7 @@ class Display:
 
 
     def get_extra_drink(self, input, amount):
+        self.lcd.clear()
         signal(SIGTERM, self.safe_exit)
         signal(SIGHUP, self.safe_exit)
 
