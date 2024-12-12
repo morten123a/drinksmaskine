@@ -100,7 +100,7 @@ class Database:
             cursor.execute(query)
             self.conn.commit()
 
-            if total_amount >=0 :
+            if total_amount <=0 :
                 query= f""" 
                     UPDATE ingredients
                     SET availability = 0
