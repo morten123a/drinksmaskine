@@ -77,6 +77,7 @@ class DrinksMachine:
         for ingredient in self.database.current_available_drinks()[self.drinks_id_sel.current_id]["ingredients"]:
             number_of_ingredient = 0
             self.amount = self.database.current_available_drinks()[self.drinks_id_sel.current_id]["ingredients"][number_of_ingredient]["amount"]
+            print(f"There is {self.amount} of {ingredient}")
             self.subtraction = self.database.subtract_poured_amount(ingredient, self.amount)
             match ingredient:
                 case 'gin':
