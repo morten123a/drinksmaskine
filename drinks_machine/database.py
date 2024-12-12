@@ -94,7 +94,7 @@ class Database:
             query= f""" 
                 UPDATE ingredients
                 SET amount = {total_amount - amount}
-                WHERE NAME = ' {input} ';   
+                WHERE NAME = '{input}';   
                 """
             print(query)
             cursor.execute(query)
@@ -103,7 +103,7 @@ class Database:
                 query= f""" 
                     UPDATE ingredients
                     SET availability = 0
-                    WHERE NAME = ' {input} ';   
+                    WHERE NAME = '{input}';   
                     """
                 cursor.execute(query)
             print("Database succesfully changed")

@@ -65,7 +65,8 @@ class DrinksMachine:
         
         if self.rotary_encoder.has_been_clicked():
             self.dispense()
-    
+            self.number_of_ingredient = 0
+
     def get_current_id_Write_display(self):
         #print(f"current drink = {self.database.current_available_drinks([self.drinks_id_sel.current_id]["name"])}")
         available_drinks = self.database.current_available_drinks()
@@ -75,12 +76,13 @@ class DrinksMachine:
     def dispense(self):
         #vide hvor meget den skal pumpe
         for ingredient in self.database.current_available_drinks()[self.drinks_id_sel.current_id]["ingredients"]:
-            number_of_ingredient = 0
-            self.amount = self.database.current_available_drinks()[self.drinks_id_sel.current_id]["ingredients"][number_of_ingredient]["amount"]
-            print(json.dumps(ingredient["ingredient"]))
-            # print(f"There is {self.amount} of {ingredient[0]["ingredient"]}")
+            print(json.dumps(ingredient))
+            self.amount = ingredient[0]["amount"]
+            
+            print(self.number_of_ingredient)
             self.subtraction = self.database.subtract_poured_amount(ingredient["ingredient"], self.amount)
-            match ingredient:
+            
+            match ingredient["ingredient"]:
                 case 'gin':
                     self.pumps[0].start(self.amount)
                     self.subtraction
@@ -100,7 +102,7 @@ class DrinksMachine:
                 case _:
                     self.display.get_extra_drink(ingredient["ingredient"], self.amount)
                     self.subtraction
-            number_of_ingredient += 1
+            
         #sende informationen til den rigtige pumpe x
         #?status på display? x
         #fjern mængden fra databasen
