@@ -50,6 +50,7 @@ class DrinksMachine:
 
     def update(self) -> None:
         self.rotary_encoder.update()
+        self.get_current_id_Write_display()
 
         if self.rotary_encoder.has_rotated_clockwise():
             self.drinks_id_sel.next_drink()
@@ -69,9 +70,10 @@ class DrinksMachine:
     def get_current_id_Write_display(self):
         #print(f"current drink = {self.database.current_available_drinks([self.drinks_id_sel.current_id]["name"])}")
         available_drinks = self.database.current_available_drinks()
-        print(self.drinks_id_sel.current_id)
+       
         self.drink_name = available_drinks[self.drinks_id_sel.current_id]["name"]
-        #self.display.write_ingredients_on_screen(self.drink_name,self.drinks_id_sel.current_id)
+        print(self.drink_name)
+        self.display.write_ingredients_on_screen(self.drink_name,self.drinks_id_sel.current_id)
 
     def dispense(self):
         #vide hvor meget den skal pumpe
