@@ -5,7 +5,7 @@ class Database:
     def __init__(self):
         pass
     
-    def filter_sql_output(self, rows):
+    def build_recipe_components_dict(self, rows):
         self.rows = rows
         result = {} #laver en tom variable
         for row in self.rows: #segmentere dataen i navnende, i row 2
@@ -44,7 +44,7 @@ class Database:
             max_value = 0
             # Hent resultater
 
-            rows_filtered = self.filter_sql_output(rows)
+            rows_filtered = self.build_recipe_components_dict(rows)
             for i in rows_filtered:
                 max_value += 1
 
@@ -60,16 +60,17 @@ class Database:
             cursor.execute(query)
             # Hent resultater
             rows = cursor.fetchall()
-            result = self.filter_sql_output(rows)
-            result = []
-            for name in result:
-                result.append({"name": name, "ingredients": result[name]})
+            recipe_components = self.build_recipe_components_dict(rows)
 
-            print(json.dumps(result))
-            print(json.dumps(result[0]["name"]))
-            print(json.dumps(result[0]["ingredients"]))
+            recipe_list = []
+            for name in recipe_components:
+                recipe_list.append({"name": name, "ingredients": recipe_components[name]})
 
-            return result 
+            # print(json.dumps(recipe_components))
+            # print(json.dumps(recipe_list[0]["name"]))
+            # print(json.dumps(recipe_list[0]["ingredients"]))
+
+            return recipe_list 
 
 
     def get_total_amount(self,input):
