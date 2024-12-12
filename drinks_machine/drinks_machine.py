@@ -70,7 +70,6 @@ class DrinksMachine:
     def get_current_id_Write_display(self):
         #print(f"current drink = {self.database.current_available_drinks([self.drinks_id_sel.current_id]["name"])}")
         available_drinks = self.database.current_available_drinks()
-       
         self.drink_name = available_drinks[self.drinks_id_sel.current_id]["name"]
         print(self.drink_name)
         self.display.write_ingredients_on_screen(self.drink_name,self.drinks_id_sel.current_id)
