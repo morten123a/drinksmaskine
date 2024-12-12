@@ -1,5 +1,6 @@
 from signal import signal, SIGTERM, SIGHUP, pause
 from rpi_lcd import LCD
+from time import sleep
 
 class Display:
     def __init__(self):
@@ -24,6 +25,7 @@ class Display:
         signal(SIGHUP, self.safe_exit)
 
         self.lcd.text(f"Please put in {amount} cl {input}", 1)
+        sleep(3)
 
     def destroy(self):
         self.lcd.clear()
