@@ -50,7 +50,6 @@ class DrinksMachine:
 
     def update(self) -> None:
         self.rotary_encoder.update()
-        self.get_current_id_Write_display()
 
         if self.rotary_encoder.has_rotated_clockwise():
             self.drinks_id_sel.next_drink()
