@@ -80,18 +80,20 @@ class Database:
                 WHERE ingredients.name = '{input}';
                 """
             cursor.execute(query)
-            self.total_amount = cursor.fetchone()
+            total_amount = cursor.fetchone()[0]
+            print(total_amount)
+            return total_amount
 
 
 
     def subtract_poured_amount(self, input, amount):
         with self.conn.cursor() as cursor:
             print(input)
-
-            self.get_total_amount(input) 
+            print(amount)
+            total_amount = self.get_total_amount(input) 
             query= f""" 
                 UPDATE ingredients
-                SET amount = {self.total_amount - amount}
+                SET amount = {total_amount - amount}
                 WHERE NAME = ' {input} ';   
                 """
             print(query)
