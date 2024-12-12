@@ -86,6 +86,7 @@ class Database:
 
     def subtract_poured_amount(self, input, amount):
         with self.conn.cursor() as cursor:
+            print(input)
             self.get_total_amount(input) 
             query= f""" 
                 UPDATE ingredients
