@@ -70,14 +70,13 @@ class DrinksMachine:
         #print(f"current drink = {self.database.current_available_drinks([self.drinks_id_sel.current_id]["name"])}")
         available_drinks = self.database.current_available_drinks()
         self.drink_name = available_drinks[self.drinks_id_sel.current_id]["name"]
-        print(self.drink_name)
         self.display.write_ingredients_on_screen(self.drink_name,self.drinks_id_sel.current_id)
 
     def dispense(self):
         #vide hvor meget den skal pumpe
         for ingredient in self.database.current_available_drinks()[self.drinks_id_sel.current_id]["ingredients"]:
             number_of_ingredient = 0
-            self.amount = self.database.current_available_drinks()[self.drinks_id_sel.current_id]["ingredients"][number_of_ingredient]['name']
+            self.amount = self.database.current_available_drinks()[self.drinks_id_sel.current_id]["ingredients"[number_of_ingredient]['amount']]
             self.subtraction = self.database.subtract_poured_amount(ingredient, self.amount)
             match ingredient:
                 case 'gin':
