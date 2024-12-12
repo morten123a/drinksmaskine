@@ -53,13 +53,11 @@ class DrinksMachine:
 
         if self.rotary_encoder.has_rotated_clockwise():
             self.drinks_id_sel.next_drink()
-            print("rotated clockwise")
             self.rotary_encoder.reset()
             self.get_current_id_Write_display()
 
         if self.rotary_encoder.has_rotated_counter_clockwise():
             self.drinks_id_sel.prev_drink()
-            print("rotated counter clockwise")
             self.rotary_encoder.reset()
             self.get_current_id_Write_display()
         
@@ -68,7 +66,6 @@ class DrinksMachine:
             
 
     def get_current_id_Write_display(self):
-        #print(f"current drink = {self.database.current_available_drinks([self.drinks_id_sel.current_id]["name"])}")
         available_drinks = self.database.current_available_drinks()
         self.drink_name = available_drinks[self.drinks_id_sel.current_id]["name"]
         self.display.write_ingredients_on_screen(self.drink_name,self.drinks_id_sel.current_id)
@@ -76,7 +73,6 @@ class DrinksMachine:
     def dispense(self):
         #vide hvor meget den skal pumpe
         for ingredient in self.database.current_available_drinks()[self.drinks_id_sel.current_id]["ingredients"]:
-            print(json.dumps(ingredient))
             self.amount = ingredient["amount"]
             
             print(self.amount)
@@ -101,7 +97,6 @@ class DrinksMachine:
 
                 case _:
                     self.display.get_extra_drink(ingredient["ingredient"], self.amount)
-                    self.subtraction
             self.drinks_id_sel.set_max_id(self.database.max_value())
         #sende informationen til den rigtige pumpe x
         #?status på display? x

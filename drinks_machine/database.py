@@ -16,10 +16,6 @@ class Database:
                 if recipe_name != row[2]:# hvis recipe navnet != navnene, da der ikke skal være navne i returværdien
                     continue
                 result[recipe_name].append({"ingredient": row[0], "amount": row[1]}) #sætter dataen pænt op, så det er læseligt
-        # print(json.dumps(result))
-        # print(json.dumps(result2))
-        # print(json.dumps(result2[0]["name"]))
-        # print(json.dumps(result2[0]["ingredients"]))
         return  result #resultatet af funktionen
 
     
@@ -65,11 +61,6 @@ class Database:
             recipe_list = []
             for name in recipe_components:
                 recipe_list.append({"name": name, "ingredients": recipe_components[name]})
-
-            # print(json.dumps(recipe_components))
-            # print(json.dumps(recipe_list[0]["name"]))
-            # print(json.dumps(recipe_list[0]["ingredients"]))
-
             return recipe_list 
 
 
@@ -81,22 +72,18 @@ class Database:
                 """
             cursor.execute(query)
             total_amount = cursor.fetchone()[0]
-            print(total_amount)
             return total_amount
 
 
 
     def subtract_poured_amount(self, ingredient_name, amount):
         with self.conn.cursor() as cursor:
-            print(ingredient_name)
-            print(amount)
             total_amount = self.get_total_amount(ingredient_name) 
             query= f""" 
                 UPDATE ingredients
                 SET amount = {total_amount - amount}
                 WHERE NAME = '{ingredient_name}';   
                 """
-            print(query)
             cursor.execute(query)
             self.conn.commit()
 
@@ -113,4 +100,3 @@ class Database:
         #skal hente mængden
         #fjerne den mængde fra databasen
         #sæt flasken til "false" når den er tom
-        pass

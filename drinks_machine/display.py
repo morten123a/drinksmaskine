@@ -14,9 +14,8 @@ class Display:
         signal(SIGTERM, self.safe_exit)
         signal(SIGHUP, self.safe_exit)
 
-        self.lcd.text(f"{input}", 1)
-        self.lcd.text(f"{id}", 2)
-        self.lcd.text("Kæft jeg er god", 3)
+        self.lcd.text(f"Drinknavn: {input}", 1)
+        self.lcd.text(f"Drinknummer: {id}", 2)
 
 
     def get_extra_drink(self, input, amount):

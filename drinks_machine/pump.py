@@ -12,7 +12,6 @@ class Pump:
         ratio = 2       #Tiden en pumpe tager for at udlevere 1 centiliter
         pouringtime = centiliters * ratio
         self.pump_line.set_value(1)
-        sleep(pouringtime)
         self.pump_line.set_value(0)
 
     def destroy(self):
