@@ -9,7 +9,7 @@ class Pump:
         self.pump_line.request(consumer="PUMP", type=gpiod.LINE_REQ_DIR_OUT)
 
     def start(self, centiliters):
-        ratio = 5       #Tiden en pumpe tager for at udlevere 1 centiliter
+        ratio = 2       #Tiden en pumpe tager for at udlevere 1 centiliter
         pouringtime = centiliters * ratio
         self.pump_line.set_value(1)
         sleep(pouringtime)

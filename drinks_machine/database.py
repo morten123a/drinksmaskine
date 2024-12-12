@@ -86,26 +86,28 @@ class Database:
 
 
 
-    def subtract_poured_amount(self, input, amount):
+    def subtract_poured_amount(self, ingredient_name, amount):
         with self.conn.cursor() as cursor:
-            print(input)
+            print(ingredient_name)
             print(amount)
-            total_amount = self.get_total_amount(input) 
+            total_amount = self.get_total_amount(ingredient_name) 
             query= f""" 
                 UPDATE ingredients
                 SET amount = {total_amount - amount}
-                WHERE NAME = '{input}';   
+                WHERE NAME = '{ingredient_name}';   
                 """
             print(query)
             cursor.execute(query)
+            self.conn.commit()
 
             if total_amount >=0 :
                 query= f""" 
                     UPDATE ingredients
                     SET availability = 0
-                    WHERE NAME = '{input}';   
+                    WHERE NAME = '{ingredient_name}';   
                     """
                 cursor.execute(query)
+                self.conn.commit()
             print("Database succesfully changed")
         # Hent resultater
         #skal hente mængden

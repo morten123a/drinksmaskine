@@ -77,7 +77,6 @@ class DrinksMachine:
         #vide hvor meget den skal pumpe
         for ingredient in self.database.current_available_drinks()[self.drinks_id_sel.current_id]["ingredients"]:
             print(json.dumps(ingredient))
-            self.index_of_ingredient = 1
             self.amount = ingredient["amount"]
             
             print(self.amount)
