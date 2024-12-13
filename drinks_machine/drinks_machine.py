@@ -68,7 +68,7 @@ class DrinksMachine:
     def get_current_id_Write_display(self):
         available_drinks = self.database.current_available_drinks()
         self.drink_name = available_drinks[self.drinks_id_sel.current_id]["name"]
-        self.display.write_ingredients_on_screen(self.drink_name)
+        self.display.write_ingredients_on_screen(self.drink_name,self.drinks_id_sel.current_id)
 
     def dispense(self):
         #vide hvor meget den skal pumpe
