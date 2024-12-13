@@ -31,11 +31,42 @@ class Database:
     def max_value(self):
         with self.conn.cursor() as cursor:
             
-            query = """SELECT ingredients.name, recipes_ingredients.amount, recipes.name FROM drinksdb.recipes_ingredients
-		            LEFT JOIN drinksdb.ingredients ON drinksdb.recipes_ingredients.ingredients_id = drinksdb.ingredients.id
-                    LEFT JOIN drinksdb.recipes ON drinksdb.recipes_ingredients.recipes_id = drinksdb.recipes.id
-                    WHERE ingredients.availability = TRUE  """
-            cursor.execute(query)
+            self.query = """SELECT 
+                    i.name AS ingredient_name, 
+                    ri.amount AS amount, 
+                    r.name AS recipe_name
+                FROM 
+                    recipes r
+                LEFT JOIN 
+                    recipes_ingredients ri ON r.id = ri.recipes_id
+                LEFT JOIN 
+                    ingredients i ON ri.ingredients_id = i.id
+                WHERE 
+                    i.availability = TRUE
+                AND 
+                    r.id IN (
+                        SELECT 
+                            ri2.recipes_id
+                        FROM 
+                            recipes_ingredients ri2
+                        JOIN 
+                            ingredients i2 ON ri2.ingredients_id = i2.id
+                        WHERE 
+                            i2.availability = TRUE
+                        GROUP BY 
+                            ri2.recipes_id
+                        HAVING 
+                            COUNT(ri2.ingredients_id) = (
+                                SELECT COUNT(ri3.ingredients_id)
+                                FROM recipes_ingredients ri3
+                                WHERE ri3.recipes_id = ri2.recipes_id
+                            )
+                    )
+                ORDER BY 
+                    r.name, i.name;
+
+                """
+            cursor.execute(self.query)
             rows = cursor.fetchall()
             max_value = 0
             # Hent resultater
@@ -49,11 +80,7 @@ class Database:
 
     def current_available_drinks(self):
         with self.conn.cursor() as cursor:
-            query= """  SELECT ingredients.name, recipes_ingredients.amount, recipes.name FROM drinksdb.recipes_ingredients
-		            LEFT JOIN drinksdb.ingredients ON drinksdb.recipes_ingredients.ingredients_id = drinksdb.ingredients.id
-                    LEFT JOIN drinksdb.recipes ON drinksdb.recipes_ingredients.recipes_id = drinksdb.recipes.id
-                    WHERE ingredients.availability = TRUE   """
-            cursor.execute(query)
+            cursor.execute(self.query)
             # Hent resultater
             rows = cursor.fetchall()
             recipe_components = self.build_recipe_components_dict(rows)

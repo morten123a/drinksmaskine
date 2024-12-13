@@ -77,6 +77,7 @@ class DrinksMachine:
             
             print(self.amount)
             self.subtraction = self.database.subtract_poured_amount(ingredient["ingredient"], self.amount)
+            print(self.subtraction)
             
             match ingredient["ingredient"]:
                 case 'gin':
