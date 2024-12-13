@@ -37,7 +37,7 @@ class DrinksMachine:
         self.pumps = [
             Pump(pin=26), 
             Pump(pin=16), 
-            Pump(pin=3), 
+            Pump(pin=6), 
             Pump(pin=5), 
         ]
         self.display = Display()
