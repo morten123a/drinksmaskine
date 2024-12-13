@@ -10,13 +10,13 @@ class Display:
     def safe_exit(signum, frame):
         exit(1)
 
-    def write_ingredients_on_screen(self, input, id):
+    def write_ingredients_on_screen(self, input):
         self.lcd.clear()
         signal(SIGTERM, self.safe_exit)
         signal(SIGHUP, self.safe_exit)
 
-        self.lcd.text(f"Drinknavn: {input}", 1)
-        self.lcd.text(f"Drinknummer: {id}", 2)
+        self.lcd.text(f"Drinknavn:", 1)
+        self.lcd.text(f"{input}", 2)
 
 
     def get_extra_drink(self, input, amount):

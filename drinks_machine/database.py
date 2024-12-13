@@ -100,3 +100,4 @@ class Database:
         #skal hente mængden
         #fjerne den mængde fra databasen
         #sæt flasken til "false" når den er tom
+        pass
