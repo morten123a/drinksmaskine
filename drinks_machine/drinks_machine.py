@@ -37,8 +37,8 @@ class DrinksMachine:
         self.pumps = [
             Pump(pin=26), 
             Pump(pin=16), 
-            Pump(pin=19), 
-            Pump(pin=13), 
+            Pump(pin=3), 
+            Pump(pin=5), 
         ]
         self.display = Display()
         self.rotary_encoder = RotaryEncoder()
