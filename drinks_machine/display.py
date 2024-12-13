@@ -15,7 +15,7 @@ class Display:
         signal(SIGTERM, self.safe_exit)
         signal(SIGHUP, self.safe_exit)
 
-        self.lcd.text(f"Drinknavn:", 1)
+        self.lcd.text("Drinknavn:", 1)
         self.lcd.text(f"{input}", 2)
 
 
