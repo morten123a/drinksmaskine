@@ -11,6 +11,7 @@ class Pump:
     def start(self, centiliters):
         ratio = 2       #Tiden en pumpe tager for at udlevere 1 centiliter
         pouringtime = centiliters * ratio
+        print("Pump is running")
         self.pump_line.set_value(1)
         sleep(pouringtime)
         self.pump_line.set_value(0)
