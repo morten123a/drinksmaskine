@@ -76,24 +76,23 @@ class DrinksMachine:
             self.amount = ingredient["amount"]
             
             print(self.amount)
-            self.subtraction = self.database.subtract_poured_amount(ingredient["ingredient"], self.amount)
 
             match ingredient["ingredient"]:
                 case 'gin':
                     self.pumps[0].start(self.amount)
-                    self.subtraction
+                    self.database.subtract_poured_amount(ingredient["ingredient"], self.amount)
                     
                 case 'mango sirup':
                     self.pumps[1].start(self.amount)
-                    self.subtraction
+                    self.database.subtract_poured_amount(ingredient["ingredient"], self.amount)
 
                 case 'vodka':
                     self.pumps[2].start(self.amount)
-                    self.subtraction
+                    self.database.subtract_poured_amount(ingredient["ingredient"], self.amount)
 
                 case 'likoer43': 
                     self.pumps[3].start(self.amount)
-                    self.subtraction
+                    self.database.subtract_poured_amount(ingredient["ingredient"], self.amount)
 
                 case _:
                     self.display.get_extra_drink(ingredient["ingredient"], self.amount)
