@@ -3,7 +3,7 @@ from display import Display
 from pump import Pump 
 from rotary_encoder import RotaryEncoder
 from time import sleep 
-import json
+
 class DrinksIdSelector:
     def __init__(self) -> None:
         self.current_id = 0
