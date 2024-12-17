@@ -8,10 +8,9 @@ class Pump:
         self.pump_line = self.chip.get_line(self.pin)
         self.pump_line.request(consumer="PUMP", type=gpiod.LINE_REQ_DIR_OUT)
 
-    def start(self, centiliters):
-        ratio = 2       #Tiden en pumpe tager for at udlevere 1 centiliter
+    def start(self, centiliters, ratio):
+        #Tiden en pumpe tager for at udlevere 1 centiliter
         pouringtime = centiliters * ratio
-        print("Pump is running")
         self.pump_line.set_value(1)
         sleep(pouringtime)
         self.pump_line.set_value(0)

@@ -79,19 +79,23 @@ class DrinksMachine:
 
             match ingredient["ingredient"]:
                 case 'gin':
-                    self.pumps[0].start(self.amount)
+                    ratio = 5.5
+                    self.pumps[0].start(self.amount, ratio)
                     self.database.subtract_poured_amount(ingredient["ingredient"], self.amount)
                     
                 case 'mango sirup':
-                    self.pumps[1].start(self.amount)
+                    ratio = 7.3
+                    self.pumps[1].start(self.amount, ratio)
                     self.database.subtract_poured_amount(ingredient["ingredient"], self.amount)
 
                 case 'vodka':
-                    self.pumps[2].start(self.amount)
+                    ratio = 5.5
+                    self.pumps[2].start(self.amount, ratio)
                     self.database.subtract_poured_amount(ingredient["ingredient"], self.amount)
 
                 case 'likoer43': 
-                    self.pumps[3].start(self.amount)
+                    ratio = 7.3
+                    self.pumps[3].start(self.amount, ratio)
                     self.database.subtract_poured_amount(ingredient["ingredient"], self.amount)
 
                 case _:
